@@ -1,5 +1,6 @@
 package kalender.model;
 
+import java.util.List;
 public class Kalender {
 
 	private List<Termin> Termine;

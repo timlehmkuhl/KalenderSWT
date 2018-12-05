@@ -1,5 +1,8 @@
 package kalender.model;
 
+import java.util.List;
+import kalender.model.date;
+
 public class Termin {
 
 	private int TerminID;

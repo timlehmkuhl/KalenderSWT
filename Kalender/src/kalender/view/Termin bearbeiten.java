@@ -1,5 +1,5 @@
 package kalender.view;
 
-public class Termin bearbeiten {
+public class TerminBearbeiten {
 
 }

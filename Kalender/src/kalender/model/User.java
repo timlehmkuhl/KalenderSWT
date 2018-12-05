@@ -1,5 +1,7 @@
 package kalender.model;
 
+import java.util.List;
+
 public class User {
 
 	private int UserID;
@@ -8,7 +10,7 @@ public class User {
 
 	private String Passwort;
 
-	private String E-Mail;
+	private String EMail;
 
 	private int KalenderID;
 
@@ -38,11 +40,11 @@ public class User {
 		return null;
 	}
 
-	public void setE-Mail(String E-Mail) {
+	public void setEMail(String EMail) {
 
 	}
 
-	public String getE-Mail() {
+	public String getEMail() {
 		return null;
 	}
 
