@@ -14,11 +14,11 @@ public class TerminController {
 
 	}
 
-	public void kontaktHinzufügen(int kontaktID) {
+	public void kontaktHinzufuegen (int kontaktID) {
 
 	}
 
-	public void kontaktEntfernen(int kontaktID) {
+	public void kontaktEntfernen (int kontaktID) {
 
 	}
 

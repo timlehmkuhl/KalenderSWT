@@ -18,7 +18,7 @@ public class KontaktController {
 
 	}
 
-	public void kontaktHinzufügen(int userID) {
+	public void kontaktHinzufuegen(int userID) {
 
 	}
 
