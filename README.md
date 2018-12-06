@@ -1,1 +1,2 @@
-# firstgit
+Softwaretechnik I 
+Kalender-Projekt
