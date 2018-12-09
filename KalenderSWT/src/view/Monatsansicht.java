@@ -61,7 +61,7 @@ public class Monatsansicht {
 		
 		GridLayout grid = new GridLayout(6, 7, 0, 0);
 		GridLayout gridWochen = new GridLayout(6, 1, 0, 0);
-		GridLayout gridMenu = new GridLayout(2, 2, 0, 0);
+		GridLayout gridMenu = new GridLayout(2, 2, 600, 10);
 
 		
 
