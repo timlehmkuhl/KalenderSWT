@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class Datenbank {
 	
-	private static final String treiber = "org.mariadb.jdbc.Driver";
 	private static Datenbank instanz;
 	private static Connection connection;
 	public static Datenbank getInstanz() {
@@ -18,7 +17,7 @@ public class Datenbank {
 	
 	private Datenbank() {
 		try {
-			Class.forName(treiber);
+			Class.forName("org.mariadb.jdbc.Driver");
 		} catch(ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
