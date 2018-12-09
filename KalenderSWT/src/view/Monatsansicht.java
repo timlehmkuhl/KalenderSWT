@@ -76,19 +76,19 @@ public class Monatsansicht {
 		
 
 		
-		JButton terminHinzufuegen = new JButton("terminHinzufuegen");
+		JButton terminHinzufuegen = new JButton("Termin hinzufügen");
 		menuPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		
-		JButton suche = new JButton("suche");
+		JButton suche = new JButton("Suche");
 		menuPanel.add(suche);
 		suche.setFont(FONT);
 		
-		JButton einstellungen = new JButton("einstellungen");
+		JButton einstellungen = new JButton("Einstellungen");
 		menuPanel.add(einstellungen);
 		einstellungen.setFont(FONT);
 		
-		JButton einladungen = new JButton("einladungen");
+		JButton einladungen = new JButton("Einladungen");
 		menuPanel.add(einladungen);
 		einladungen.setFont(FONT);
 		
