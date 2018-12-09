@@ -17,7 +17,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-public class MonatsView {
+public class Monatsansicht {
 	public List<JButton> buttonList = new LinkedList<>();
 	public List<JLabel> buttonListWochen = new LinkedList<>();
 	public List<JLabel> buttonListWochentage = new LinkedList<>();
@@ -31,7 +31,7 @@ public class MonatsView {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MonatsView window = new MonatsView();
+					Monatsansicht window = new Monatsansicht();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class MonatsView {
 	/**
 	 * Create the application. BY ECLIPSE
 	 */
-	public MonatsView() {
+	public Monatsansicht() {
 		initialize();
 	}
 
@@ -61,7 +61,7 @@ public class MonatsView {
 		
 		GridLayout grid = new GridLayout(6, 7, 0, 0);
 		GridLayout gridWochen = new GridLayout(6, 1, 0, 0);
-		GridLayout gridMenu = new GridLayout(2, 2, 600, 10);
+		GridLayout gridMenu = new GridLayout(2, 2, 0, 0);
 
 		
 
@@ -76,7 +76,7 @@ public class MonatsView {
 		
 
 		
-		/*JButton terminHinzufuegen = new JButton("Termin hinzufügen");
+		JButton terminHinzufuegen = new JButton("Termin hinzufügen");
 		menuPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		
@@ -91,7 +91,7 @@ public class MonatsView {
 		JButton einladungen = new JButton("Einladungen");
 		menuPanel.add(einladungen);
 		einladungen.setFont(FONT);
-		*/
+		
 	
 		
 		
