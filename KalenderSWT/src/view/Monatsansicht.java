@@ -76,7 +76,7 @@ public class Monatsansicht {
 		
 
 		
-		JButton terminHinzufuegen = new JButton("Termin hinzufügen");
+		/*JButton terminHinzufuegen = new JButton("Termin hinzufügen");
 		menuPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		
@@ -91,7 +91,7 @@ public class Monatsansicht {
 		JButton einladungen = new JButton("Einladungen");
 		menuPanel.add(einladungen);
 		einladungen.setFont(FONT);
-		
+		*/
 	
 		
 		
