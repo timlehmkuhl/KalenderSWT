@@ -25,7 +25,7 @@ public class Monatsansicht {
 	private JFrame frame;
 
 	/**
-	 * Launch the application. BY ECLIPSE 
+	 * Launch the application.. BY ECLIPSE 
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
