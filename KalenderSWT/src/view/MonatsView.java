@@ -17,7 +17,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-public class Monatsansicht {
+public class MonatsView {
 	public List<JButton> buttonList = new LinkedList<>();
 	public List<JLabel> buttonListWochen = new LinkedList<>();
 	public List<JLabel> buttonListWochentage = new LinkedList<>();
@@ -31,7 +31,7 @@ public class Monatsansicht {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Monatsansicht window = new Monatsansicht();
+					MonatsView window = new MonatsView();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class Monatsansicht {
 	/**
 	 * Create the application. BY ECLIPSE
 	 */
-	public Monatsansicht() {
+	public MonatsView() {
 		initialize();
 	}
 
