@@ -26,8 +26,8 @@ public class Datenbank {
 	public void connect() {
 		if(connection == null) {
 			try {
-				//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/SWT2018", "Kalender", "SWT2018");
 				connection = DriverManager.getConnection("jdbc:mysql://localhost/SWT2018?user=Kalender&password=SWT2018&serverTimezone=CET");
+				System.out.println("Connection Sucsessfull");
 			} catch (SQLException ex){
 				ex.printStackTrace();
 			}
@@ -38,10 +38,13 @@ public class Datenbank {
 		if (connection != null) {
 			try {
 				connection.close();
+				connection = null;
+				System.out.println("Connection Sucsessfully closed");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			connection = null;
+			
+			
 		}
 	}
 	
