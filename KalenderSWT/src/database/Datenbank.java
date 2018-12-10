@@ -17,16 +17,17 @@ public class Datenbank {
 	
 	private Datenbank() {
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch(ClassNotFoundException ex) {
 			ex.printStackTrace();
-		}
+		} 
 	}
 	
 	public void connect() {
 		if(connection == null) {
 			try {
-			connection = DriverManager.getConnection("jdbc:mariadb://localhost/SWT2018?user=Kalender&password=SWT2018");
+				//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/SWT2018", "Kalender", "SWT2018");
+				connection = DriverManager.getConnection("jdbc:mysql://localhost/SWT2018?user=Kalender&password=SWT2018&serverTimezone=CET");
 			} catch (SQLException ex){
 				ex.printStackTrace();
 			}
