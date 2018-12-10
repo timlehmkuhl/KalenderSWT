@@ -6,6 +6,9 @@ import java.sql.SQLException;
 
 import com.mysql.cj.jdbc.CallableStatement;
 
+import model.Termin;
+import model.User;
+
 public class Datenbank {
 	
 	private static Datenbank instanz;
@@ -62,5 +65,12 @@ public class Datenbank {
 		}
 	}
 	
+	public User logIn(String userName, String Password) {
+		return new User();
+	}
+	
+	public void addTermin(User u, Termin t) {
+		
+	}
 	
 }
