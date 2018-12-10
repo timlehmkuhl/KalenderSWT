@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.mysql.cj.jdbc.CallableStatement;
+
 public class Datenbank {
 	
 	private static Datenbank instanz;
@@ -45,6 +47,18 @@ public class Datenbank {
 			}
 			
 			
+		}
+	}
+	
+	public void addUser(String userName, String  Password) {
+		
+		String call = "call addUser(?, ?)";
+		try (java.sql.CallableStatement stmt = connection.prepareCall(call)) {
+			stmt.setString(1, userName);
+			stmt.setString(2, Password);
+		stmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
