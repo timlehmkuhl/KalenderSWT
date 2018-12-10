@@ -52,13 +52,13 @@ public class Datenbank {
 	
 	public void addUser(String userName, String  Password) {
 		
-		String call = "call addUser(?, ?)";
+		String call = "call addUser(?, ?)"; //stored procedure
 		try (java.sql.CallableStatement stmt = connection.prepareCall(call)) {
 			stmt.setString(1, userName);
 			stmt.setString(2, Password);
 		stmt.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();  
+			e.printStackTrace(); 
 		}
 	}
 	
