@@ -20,5 +20,9 @@ public class User {
 		}
 		else return loggedIn;
 	}
+	
+	public String toString() {
+		return Username + "\t" + kalender.toString();
+	}
 }
 //

@@ -70,16 +70,17 @@ public class Datenbank {
 		}
 	}
 	
-public User logIn(String userName, String Password) {
+public void logIn(String userName, String Password) {
 		
 		//Methode die userName und Password auf ungueltige Zeichen checkt
 	try {
-		String sql = "select * from users where name = ? and passwordHash = ?";
-		java.sql.PreparedStatement stmt = connection.prepareStatement(sql);
-		stmt.setString(1, userName);
-		stmt.setString(2, Password);
-		ResultSet res = stmt.executeQuery();
+		String sql = "select * from users where name = " + userName + " and passwordHash = " + Password;
+		java.sql.Statement stmt = connection.createStatement();
 		
+		//stmt.setString(1, userName);
+		//stmt.setString(2, Password);
+		ResultSet res = stmt.executeQuery(sql);
+
 		if(res.next()) {
 			//login succesfull
 			try {
@@ -102,7 +103,6 @@ public User logIn(String userName, String Password) {
 	} catch (SQLException e) {
 		e.printStackTrace(); 
 	}
-		return new User("gdgd", new Kalender(), true);
 	}
 
 	
