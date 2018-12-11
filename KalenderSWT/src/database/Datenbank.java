@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.mysql.cj.jdbc.CallableStatement;
 import com.mysql.cj.xdevapi.Statement;
@@ -85,11 +87,11 @@ public User logIn(String userName, String Password) {
 				java.sql.PreparedStatement stmt2 = connection.prepareStatement(getTermine);
 				stmt2.setString(1, userName);
 				ResultSet termine = stmt2.executeQuery();
+				List<Termin> dbTermine = new LinkedList<>();
 				while (termine.next()) {
-					
+					dbTermine.add(new Termin(termine.getString("name"), termine.getDate("startZeit"), termine.getDate("endZeit")));
 				}
-				
-				User.regUser(userName, new Kalender());
+				User.regUser(userName, new Kalender(dbTermine));
 			} catch (SQLException e) {
 				e.printStackTrace(); 
 			}

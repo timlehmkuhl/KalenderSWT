@@ -1,24 +1,30 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import database.Datenbank;
 
 public class Kalender {
-	private List<Termin> termine = new ArrayList<>();
+	private List<Termin> termine = new LinkedList<>();
 	
-	public Kalender(Termin... termine) {
-		for(Termin t : termine) {
-			this.termine.add(t);
-		}
+	public Kalender(List<Termin> termine) {
+		this.termine = termine;
 	}
 	
 	public void addTermine(Termin... termine) {
 		for(Termin t : termine) {
 			this.termine.add(t);
-			Datenbank.getInstanz().addTermin(t);
+			//Datenbank.getInstanz().addTermin(t);
 		}
+	}
+	
+	public String toString() {
+		String temp = "";
+		for(Termin t : termine) {
+			temp += t;
+		}
+		return temp;
 	}
 	
 }

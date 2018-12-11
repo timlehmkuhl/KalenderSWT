@@ -1,17 +1,24 @@
 package model;
 
+import java.util.Date;
+
 public class Termin {
 	private String Farbe;
 	private String Name;
 	private String Ort;
-	private double Datum;
+	private Date StartZeit;
+	private Date EndZeit;
 	private String Notiz;
 	private String Icon;
 	
-	public Termin(String Name, String Ort, double Datum) {
+	public Termin(String Name, Date StartZeit, Date EndZeit) {
 		this.Name = Name;
-		this.Ort = Ort;
-		this.Datum = Datum;
+		this.EndZeit = EndZeit;
+		this.StartZeit = StartZeit;
+	}
+	
+	public String toString() {
+		return Name + StartZeit.toString() + EndZeit.toString();
 	}
 	
 }
