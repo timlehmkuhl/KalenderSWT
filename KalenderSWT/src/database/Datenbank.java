@@ -71,13 +71,21 @@ public class Datenbank {
 public User logIn(String userName, String Password) {
 		
 		//Methode die userName und Password auf ungueltige Zeichen checkt
-		String sql = "select count(name) from users where name = ? and passwordHash = ?";
+	try {
+		String sql = "select * from users where name = ? and passwordHash = ?";
 		java.sql.PreparedStatement stmt = connection.prepareStatement(sql);
 		stmt.setString(1, userName);
 		stmt.setString(2, Password);
 		ResultSet res = stmt.executeQuery();
 		
-		
+		if(res.next()) {
+			//login success
+		} else {
+			//failed
+		}
+	} catch (SQLException e) {
+		e.printStackTrace(); 
+	}
 		return new User("gdgd", new Kalender(), true);
 	}
 	
