@@ -79,7 +79,7 @@ public User logIn(String userName, String Password) {
 		ResultSet res = stmt.executeQuery();
 		
 		if(res.next()) {
-			//login success
+			
 		} else {
 			//failed
 		}
@@ -88,6 +88,9 @@ public User logIn(String userName, String Password) {
 	}
 		return new User("gdgd", new Kalender(), true);
 	}
+
+
+
 	
 	public void addTermin(Termin t) {
 		
