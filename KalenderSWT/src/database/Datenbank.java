@@ -2,10 +2,13 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.cj.jdbc.CallableStatement;
+import com.mysql.cj.xdevapi.Statement;
 
+import model.Kalender;
 import model.Termin;
 import model.User;
 
@@ -65,11 +68,20 @@ public class Datenbank {
 		}
 	}
 	
-	public User logIn(String userName, String Password) {
-		return new User();
+public User logIn(String userName, String Password) {
+		
+		//Methode die userName und Password auf ungueltige Zeichen checkt
+		String sql = "select count(name) from users where name = ? and passwordHash = ?";
+		java.sql.PreparedStatement stmt = connection.prepareStatement(sql);
+		stmt.setString(1, userName);
+		stmt.setString(2, Password);
+		ResultSet res = stmt.executeQuery();
+		
+		
+		return new User("gdgd", new Kalender(), true);
 	}
 	
-	public void addTermin(User u, Termin t) {
+	public void addTermin(Termin t) {
 		
 	}
 	

@@ -7,10 +7,8 @@ import database.Datenbank;
 
 public class Kalender {
 	private List<Termin> termine = new ArrayList<>();
-	private final User keeper;
 	
-	public Kalender(User u, Termin... termine) {
-		this.keeper = u;
+	public Kalender(Termin... termine) {
 		for(Termin t : termine) {
 			this.termine.add(t);
 		}
@@ -19,7 +17,7 @@ public class Kalender {
 	public void addTermine(Termin... termine) {
 		for(Termin t : termine) {
 			this.termine.add(t);
-			Datenbank.getInstanz().addTermin(keeper, t);
+			Datenbank.getInstanz().addTermin(t);
 		}
 	}
 	

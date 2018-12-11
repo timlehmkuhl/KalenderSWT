@@ -6,9 +6,11 @@ public class User {
 	private String Password;
 	private String email;
 	private Kalender Kalender;
-	private Boolean loggedOn;
+	private Boolean loggedIn;
 	
-	public User() {
-		
+	public User(String Username, Kalender kalender, Boolean loggedIn) {
+		this.loggedIn = loggedIn;
+		this.Username = Username;
+		this.kalender = kalender;
 	}
 }
