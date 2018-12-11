@@ -74,20 +74,17 @@ public void logIn(String userName, String Password) {
 		
 		//Methode die userName und Password auf ungueltige Zeichen checkt
 	try {
-		String sql = "select * from users where name = " + userName + " and passwordHash = " + Password;
+		String sql = "select * from users where " + "name = '" + userName + "' and passwordHash = '" + Password +"'";
 		java.sql.Statement stmt = connection.createStatement();
-		
-		//stmt.setString(1, userName);
-		//stmt.setString(2, Password);
 		ResultSet res = stmt.executeQuery(sql);
 
 		if(res.next()) {
 			//login succesfull
 			try {
-				String getTermine = "select * from ?";
-				java.sql.PreparedStatement stmt2 = connection.prepareStatement(getTermine);
-				stmt2.setString(1, userName);
-				ResultSet termine = stmt2.executeQuery();
+				String getTermine = "select * from " + userName;
+				java.sql.Statement stmt2 = connection.createStatement();
+				
+				ResultSet termine = stmt2.executeQuery(getTermine);
 				List<Termin> dbTermine = new LinkedList<>();
 				while (termine.next()) {
 					dbTermine.add(new Termin(termine.getString("name"), termine.getDate("startZeit"), termine.getDate("endZeit")));
@@ -100,6 +97,8 @@ public void logIn(String userName, String Password) {
 		} else {
 			//failed
 		}
+		
+		
 	} catch (SQLException e) {
 		e.printStackTrace(); 
 	}

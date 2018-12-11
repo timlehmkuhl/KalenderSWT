@@ -8,7 +8,7 @@ public class MainToTest {
 		Datenbank.getInstanz();
 		Datenbank.getInstanz().connect();
 		Datenbank.getInstanz().logIn("Hans", "Peter");
-		//Datenbank.getInstanz().addUser("Hans", "Peter");		
+		//Datenbank.getInstanz().addUser("abcdefg", "hijklmnop");		
 		
 		
 		System.out.println(User.getInstanz());
