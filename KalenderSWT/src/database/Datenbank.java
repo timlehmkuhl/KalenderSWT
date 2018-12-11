@@ -79,6 +79,20 @@ public User logIn(String userName, String Password) {
 		ResultSet res = stmt.executeQuery();
 		
 		if(res.next()) {
+			//login succesfull
+			try {
+				String getTermine = "select * from ?";
+				java.sql.PreparedStatement stmt2 = connection.prepareStatement(getTermine);
+				stmt2.setString(1, userName);
+				ResultSet termine = stmt2.executeQuery();
+				while (termine.next()) {
+					
+				}
+				
+				User.regUser(userName, new Kalender());
+			} catch (SQLException e) {
+				e.printStackTrace(); 
+			}
 			
 		} else {
 			//failed
@@ -89,7 +103,7 @@ public User logIn(String userName, String Password) {
 		return new User("gdgd", new Kalender(), true);
 	}
 
-
+	
 
 	
 	public void addTermin(Termin t) {

@@ -3,7 +3,6 @@ package model;
 public class User {
 	private Kalender kalender;
 	private String Username;
-	
 	private static User loggedIn = null;
 	
 	private User(String Username, Kalender kalender) {
