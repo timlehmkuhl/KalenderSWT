@@ -1,21 +1,21 @@
 package model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import database.Datenbank;
 
 public class Termin {
 	
 	private String Name;
-	private Date StartZeit;
-	private Date EndZeit;
+	private Timestamp StartZeit;
+	private Timestamp EndZeit;
 	private String Ort;
 	private String Notiz;
 	private String Icon;
 	private String Farbe;
 	
 	
-	public Termin(String name, Date startZeit, Date endZeit, String farbe, String ort, String notiz, String icon) {
+	public Termin(String name, Timestamp startZeit, Timestamp endZeit, String farbe, String ort, String notiz, String icon) {
 		Name = name;
 		StartZeit = startZeit;
 		EndZeit = endZeit;
@@ -35,11 +35,11 @@ public class Termin {
 		return Name;
 	}
 
-	public Date getStartZeit() {
+	public Timestamp getStartZeit() {
 		return StartZeit;
 	}
 
-	public Date getEndZeit() {
+	public Timestamp getEndZeit() {
 		return EndZeit;
 	}
 

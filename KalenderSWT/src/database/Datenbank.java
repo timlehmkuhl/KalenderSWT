@@ -87,7 +87,7 @@ public class Datenbank {
 					ResultSet termine = stmt2.executeQuery(getTermine);
 					List<Termin> dbTermine = new LinkedList<>();
 					while (termine.next()) {
-						dbTermine.add(new Termin(termine.getString("name"), termine.getDate("startZeit"), termine.getDate("endZeit"), 
+						dbTermine.add(new Termin(termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
 								termine.getString("Farbe"), termine.getString("Ort"), termine.getString("Notiz"), termine.getString("Icon")));
 					}
 					User.regUser(userName, new Kalender(dbTermine));
