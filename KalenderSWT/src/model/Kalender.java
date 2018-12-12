@@ -22,7 +22,7 @@ public class Kalender {
 	public String toString() {
 		String temp = "";
 		for(Termin t : termine) {
-			temp += t;
+			temp += t +"\n";
 		}
 		return temp;
 	}

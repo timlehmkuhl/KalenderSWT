@@ -1,5 +1,7 @@
 package model;
 
+import database.Datenbank;
+
 public class User {
 	private Kalender kalender;
 	private String Username;
@@ -21,8 +23,21 @@ public class User {
 		else return loggedIn;
 	}
 	
-	public String toString() {
-		return Username + "\t" + kalender.toString();
+	
+	public void addTermin(Termin t) {
+		kalender.addTermine(t);
+		Datenbank.getInstanz().addTermin(t);
 	}
+	
+	
+	public String toString() {
+		return Username + "\n" + kalender.toString();
+	}
+	
+	public String getUsername() {
+		return Username;
+	}
+	
+	
 }
 //
