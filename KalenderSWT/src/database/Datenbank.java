@@ -1,5 +1,7 @@
 package database;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -59,13 +61,14 @@ public class Datenbank {
 	}
 	
 	public void addUser(String userName, String  Password) {
-		
 		String call = "call addUser(?, ?)"; //stored procedure
 		try (java.sql.CallableStatement stmt = connection.prepareCall(call)) {
+			Password = PasswordManagement.generateStorngPasswordHash(Password);
+			System.out.println(Password);
 			stmt.setString(1, userName);
 			stmt.setString(2, Password);
 		stmt.execute();
-		} catch (SQLException e) {
+		} catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			e.printStackTrace(); 
 		}
 	}
@@ -74,12 +77,13 @@ public class Datenbank {
 			
 			//Methode die userName und Password auf ungueltige Zeichen checkt
 		try {
-			String sql = "select * from users where " + "name = '" + userName + "' and passwordHash = '" + Password +"'";
+			String sql = "select * from users where " + "name = '" + userName +"'";
 			java.sql.Statement stmt = connection.createStatement();
 			ResultSet res = stmt.executeQuery(sql);
-	
-			if(res.next()) {
+			System.out.println("just outside");
+			if(res.next() && PasswordManagement.validatePassword(Password, res.getString("passwordHash"))) {
 				//login succesfull
+				System.out.println("in the if");
 				try {
 					String getTermine = "select * from " + userName;
 					java.sql.Statement stmt2 = connection.createStatement();
@@ -100,7 +104,7 @@ public class Datenbank {
 				//failed
 			}
 			
-		} catch (SQLException e) {
+		} catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			e.printStackTrace(); 
 		}
 	}
