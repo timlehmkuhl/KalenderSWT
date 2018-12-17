@@ -27,6 +27,9 @@ public class Datenbank {
 		return instanz;
 	}
 	
+	/**
+	 * 
+	 */
 	private Datenbank() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -73,6 +76,11 @@ public class Datenbank {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param userName
+	 * @param Password
+	 */
 	public void logIn(String userName, String Password) {
 			
 			//Methode die userName und Password auf ungueltige Zeichen checkt

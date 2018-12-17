@@ -11,13 +11,13 @@ public class MainToTest {
 	public static void main(String[] args) {
 		Datenbank.getInstanz();
 		Datenbank.getInstanz().connect();
-		Datenbank.getInstanz().addUser("DeineMudda", "keineAhnung");	
-		Datenbank.getInstanz().logIn("DeineMudda", "keineAhnung");
+		//Datenbank.getInstanz().addUser("SörenWerth", "asdw");	
+		Datenbank.getInstanz().logIn("SörenWerth", "asdw");
 			
 		
 		
 		System.out.println(User.getInstanz());
-		User.getInstanz().addTermin(new Termin("Gassi Gehn", new Timestamp(1_220_227_600L * 1_000L ), new Timestamp(1_220_227_200L * 1_000L), "rot", null, "lol", null));
+		User.getInstanz().addTermin(new Termin("Aufstehen", new Timestamp(1_220_267_600L * 1_000L ), new Timestamp(1_220_227_200L * 1_000L), "rot", null, "lol", null));
 		System.out.println(User.getInstanz());
 		Datenbank.getInstanz().disconnect();
 
