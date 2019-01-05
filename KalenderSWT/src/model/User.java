@@ -38,6 +38,9 @@ public class User {
 		return Username;
 	}
 	
+	public Kalender getKalender() {
+		return kalender;
+	}
 	
 }
 //

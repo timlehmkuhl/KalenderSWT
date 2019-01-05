@@ -92,21 +92,21 @@ public class Datenbank {
 			if(res.next() && PasswordManagement.validatePassword(Password, res.getString("passwordHash"))) {
 				//login succesfull
 				System.out.println("in the if");
-				try {
-					String getTermine = "select * from " + userName;
-					java.sql.Statement stmt2 = connection.createStatement();
-					
-					ResultSet termine = stmt2.executeQuery(getTermine);
-					List<Termin> dbTermine = new LinkedList<>();
-					while (termine.next()) {
-						dbTermine.add(new Termin(termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
-								termine.getString("Farbe"), termine.getString("Ort"), termine.getString("Notiz"), termine.getString("Icon")));
-					}
-					User.regUser(userName, new Kalender(dbTermine));
-					System.out.println("Login erfolgreich");
-				} catch (SQLException e) {
-					e.printStackTrace(); 
-				}
+//				try {
+//					String getTermine = "select * from " + userName;
+//					java.sql.Statement stmt2 = connection.createStatement();
+//					
+//					ResultSet termine = stmt2.executeQuery(getTermine);
+//					List<Termin> dbTermine = new LinkedList<>();
+//					while (termine.next()) {
+//						dbTermine.add(new Termin(termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
+//								termine.getString("Farbe"), termine.getString("Ort"), termine.getString("Notiz"), termine.getString("Icon")));
+//					}
+//					User.regUser(userName, new Kalender(dbTermine));
+//					System.out.println("Login erfolgreich");
+//				} catch (SQLException e) {
+//					e.printStackTrace(); 
+//				}
 				
 			} else {
 				//failed
@@ -117,6 +117,24 @@ public class Datenbank {
 		}
 	}
 
+	public void syncMonth(int month, int year){
+		try {
+			String getTermine = "select * from " + User.getInstanz().getUsername();
+			java.sql.Statement stmt3 = connection.createStatement();
+			
+			ResultSet termine = stmt3.executeQuery(getTermine);
+			
+			while (termine.next()) {
+				if(!User.getInstanz().getKalender().terminLoaded(termine.getInt("terminID"))) {
+					User.getInstanz().addTermin(new Termin(termine.getInt("terminID"), termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
+							termine.getString("Farbe"), termine.getString("Ort"), termine.getString("Notiz"), termine.getString("Icon")));
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace(); 
+		}
+	}
 
 
 	public void addTermin(Termin t) {
@@ -177,6 +195,25 @@ public class Datenbank {
 				System.out.println(addTermin);
 				java.sql.Statement add = connection.createStatement();
 				add.executeUpdate(addTermin);
+				
+				
+				//der Termin bekommt von der Datenbank eine ID, die muessen wir abfragen um im lokalen System Die ID zu haben
+				try {
+					String getID = "select MAX(terminID) as lastID from " + User.getInstanz().getUsername();
+					java.sql.Statement stmt4 = connection.createStatement();
+					
+					ResultSet ID = stmt4.executeQuery(getID);
+					int foundID = 0;
+					while (ID.next()) {
+						foundID = ID.getInt("lastID");
+					}
+			
+					t.setID(foundID);	
+					
+				} catch (SQLException e) {
+					e.printStackTrace(); 
+				}
+				
 				
 			} catch (SQLException e) {
 				e.printStackTrace(); 

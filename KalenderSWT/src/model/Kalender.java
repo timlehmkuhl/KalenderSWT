@@ -27,4 +27,11 @@ public class Kalender {
 		return temp;
 	}
 	
+	public boolean terminLoaded(int terminID) {
+		for(Termin t : termine) {
+			if(t.getID() == terminID) return true;
+		}
+		return false;
+	}
+	
 }
