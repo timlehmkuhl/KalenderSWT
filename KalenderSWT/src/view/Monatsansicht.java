@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import model.User;
+
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.util.LinkedList;
@@ -114,6 +116,9 @@ public class Monatsansicht {
 		//ALLE TAGE ALS BUTTONS
 		for (int i = 1; i <= 35; i++) {
 			buttonList.add(new JButton(String.valueOf(i)));
+			if(User.getInstanz().getKalender().terminOnDay(i)) {
+				buttonList.get(i).setForeground(Color.RED);
+			}
 			//buttonList.get(i).setBackground(Color.WHITE);
 			//buttonList.get(i).setFont(FONT);
 			//tagePanel.add(buttonList.get(i));

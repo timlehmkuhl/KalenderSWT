@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,6 +37,19 @@ public class Kalender {
 	public boolean terminLoaded(int terminID) {
 		for(Termin t : termine) {
 			if(t.getID() == terminID) return true;
+		}
+		return false;
+	}
+	
+	public boolean terminOnDay(int day) {
+		Calendar c = Calendar.getInstance();
+		int year = User.getInstanz().getYearViewed();
+		int month = User.getInstanz().getMonthViewed();
+		for(Termin t : termine) {
+			c.setTime(t.getStartZeit());
+			if(c.get(Calendar.DAY_OF_MONTH) == day && c.get(Calendar.YEAR) == year && c.get(Calendar.MONTH) == month) {
+				return true;
+			}
 		}
 		return false;
 	}
