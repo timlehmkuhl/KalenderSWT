@@ -118,6 +118,7 @@ public class Monatsansicht {
 			//buttonList.get(i).setFont(FONT);
 			//tagePanel.add(buttonList.get(i));
 		}
+		
 		buttonList.stream().forEach(x -> x.setBackground(Color.WHITE));
 		buttonList.stream().forEach(x -> x.setFont(FONT));
 		buttonList.stream().forEach(x -> tagePanel.add(x));
