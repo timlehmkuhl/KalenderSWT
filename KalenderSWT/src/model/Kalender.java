@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,12 +42,27 @@ public class Kalender {
 		return false;
 	}
 	
+	public List<Integer> DaysNotFree(){
+		List<Integer> days = new ArrayList<Integer>();
+		Calendar c = Calendar.getInstance();
+		int year = User.getInstanz().getYearViewed();
+		int month = User.getInstanz().getMonthViewed();
+		for(Termin t : termine) {
+			c.setTime(t.getStartZeit());
+			if( c.get(Calendar.MONTH) == month && c.get(Calendar.YEAR) == year) {
+				days.add(c.get(Calendar.DAY_OF_MONTH));
+			}
+		}
+		return days;
+	}
+	
 	public boolean terminOnDay(int day) {
 		Calendar c = Calendar.getInstance();
 		int year = User.getInstanz().getYearViewed();
 		int month = User.getInstanz().getMonthViewed();
 		for(Termin t : termine) {
 			c.setTime(t.getStartZeit());
+			System.out.println(Integer.toString(c.get(Calendar.DAY_OF_MONTH)) + " " + Integer.toString(day) + " " + Integer.toString(c.get(Calendar.YEAR)) + " " + Integer.toString(year) + " " + Integer.toString(month) + " " + Integer.toString(c.get(Calendar.MONTH)));
 			if(c.get(Calendar.DAY_OF_MONTH) == day && c.get(Calendar.YEAR) == year && c.get(Calendar.MONTH) == month) {
 				return true;
 			}

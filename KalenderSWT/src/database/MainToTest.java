@@ -17,13 +17,14 @@ public class MainToTest {
 		
 		
 		System.out.println(User.getInstanz());
-		Timestamp begin = Timestamp.valueOf("2019-01-19 11:10:10.0");
-		Timestamp end = Timestamp.valueOf("2019-01-19 11:30:10.0");
+		Timestamp begin = Timestamp.valueOf("2019-01-07 11:10:10.0");
+		Timestamp end = Timestamp.valueOf("2019-01-07 11:30:10.0");
 		
 		User.getInstanz().addTermin(new Termin("Auch Im monat", begin, end, "rot", null, "lol", null));
 		System.out.println(User.getInstanz());
-		User.getInstanz().setView(9, 2008);
+		//User.getInstanz().setView(9, 2008);
 		System.out.println(User.getInstanz());
+		view.Monatsansicht.main(null);
 		
 		Datenbank.getInstanz().disconnect();
 

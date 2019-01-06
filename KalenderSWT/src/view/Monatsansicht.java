@@ -116,13 +116,15 @@ public class Monatsansicht {
 		//ALLE TAGE ALS BUTTONS
 		for (int i = 1; i <= 35; i++) {
 			buttonList.add(new JButton(String.valueOf(i)));
-			if(User.getInstanz().getKalender().terminOnDay(i)) {
-				buttonList.get(i).setForeground(Color.RED);
-			}
 			//buttonList.get(i).setBackground(Color.WHITE);
 			//buttonList.get(i).setFont(FONT);
 			//tagePanel.add(buttonList.get(i));
 		}
+		
+		for(int i : User.getInstanz().getKalender().DaysNotFree()) {
+			buttonList.get(i-1).setForeground(Color.RED);
+		}
+		
 		
 		buttonList.stream().forEach(x -> x.setBackground(Color.WHITE));
 		buttonList.stream().forEach(x -> x.setFont(FONT));
