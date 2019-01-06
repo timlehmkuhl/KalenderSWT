@@ -38,7 +38,7 @@ public class Termin {
 	}
 
 	public String toString() {
-		return Name + StartZeit.toString() + EndZeit.toString();
+		return  Integer.toString(ID) + " " + Name + StartZeit.toString() + EndZeit.toString();
 	}
 
 	public String getName() {

@@ -9,14 +9,20 @@ public class Kalender {
 	private List<Termin> termine = new LinkedList<>();
 	
 	public Kalender(List<Termin> termine) {
-		this.termine = termine;
+		if(termine != null) {
+			this.termine = termine;
+		}
 	}
 	
-	public void addTermine(Termin... termine) {
+	public void addTermine(Termin... termine) {		//Zum erstellen von Terminen. Diese werden auch in der Db gespeichert
 		for(Termin t : termine) {
 			this.termine.add(t);
-			//Datenbank.getInstanz().addTermin(t);
+			Datenbank.getInstanz().addTermin(t);
 		}
+	}
+	
+	public void loadTermin(Termin t) {		//Zum laden aus der Datenbank
+		this.termine.add(t);
 	}
 	
 	public String toString() {

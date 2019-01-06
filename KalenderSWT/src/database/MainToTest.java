@@ -17,8 +17,14 @@ public class MainToTest {
 		
 		
 		System.out.println(User.getInstanz());
-		User.getInstanz().addTermin(new Termin("Aufstehen", new Timestamp(1_220_267_600L * 1_000L ), new Timestamp(1_220_227_200L * 1_000L), "rot", null, "lol", null));
+		Timestamp begin = Timestamp.valueOf("2019-01-19 11:10:10.0");
+		Timestamp end = Timestamp.valueOf("2019-01-19 11:30:10.0");
+		
+		User.getInstanz().addTermin(new Termin("Auch Im monat", begin, end, "rot", null, "lol", null));
 		System.out.println(User.getInstanz());
+		User.getInstanz().setView(9, 2008);
+		System.out.println(User.getInstanz());
+		
 		Datenbank.getInstanz().disconnect();
 
 	}

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -92,21 +93,25 @@ public class Datenbank {
 			if(res.next() && PasswordManagement.validatePassword(Password, res.getString("passwordHash"))) {
 				//login succesfull
 				System.out.println("in the if");
-//				try {
-//					String getTermine = "select * from " + userName;
-//					java.sql.Statement stmt2 = connection.createStatement();
-//					
-//					ResultSet termine = stmt2.executeQuery(getTermine);
-//					List<Termin> dbTermine = new LinkedList<>();
-//					while (termine.next()) {
-//						dbTermine.add(new Termin(termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
-//								termine.getString("Farbe"), termine.getString("Ort"), termine.getString("Notiz"), termine.getString("Icon")));
-//					}
-//					User.regUser(userName, new Kalender(dbTermine));
-//					System.out.println("Login erfolgreich");
-//				} catch (SQLException e) {
-//					e.printStackTrace(); 
-//				}
+				try {
+					int MonthViewed = Calendar.getInstance().get(Calendar.MONTH) + 1; //+1 Weil Januar sonnst 0 Waere bei SQL Januar aber 1 ist.
+					int YearViewed = Calendar.getInstance().get(Calendar.YEAR);
+					
+					String getTermine = "select * from " + userName + " WHERE MONTH(startZeit) = " + MonthViewed + " AND YEAR(startZeit) = " + YearViewed;
+					System.out.println(getTermine);
+					java.sql.Statement stmt2 = connection.createStatement();
+					
+					ResultSet termine = stmt2.executeQuery(getTermine);
+					List<Termin> dbTermine = new LinkedList<>();
+					while (termine.next()) {
+						dbTermine.add(new Termin(termine.getInt("terminID"), termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
+								termine.getString("Farbe"), termine.getString("Ort"), termine.getString("Notiz"), termine.getString("Icon")));
+					}
+					User.regUser(userName, new Kalender(dbTermine));
+					System.out.println("Login erfolgreich");
+				} catch (SQLException e) {
+					e.printStackTrace(); 
+				}
 				
 			} else {
 				//failed
@@ -119,14 +124,14 @@ public class Datenbank {
 
 	public void syncMonth(int month, int year){
 		try {
-			String getTermine = "select * from " + User.getInstanz().getUsername();
+			String getTermine = "select * from " + User.getInstanz().getUsername() + " WHERE MONTH(startZeit) = " + month + " AND YEAR(startZeit) = " + year;
 			java.sql.Statement stmt3 = connection.createStatement();
 			
 			ResultSet termine = stmt3.executeQuery(getTermine);
 			
 			while (termine.next()) {
 				if(!User.getInstanz().getKalender().terminLoaded(termine.getInt("terminID"))) {
-					User.getInstanz().addTermin(new Termin(termine.getInt("terminID"), termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
+					User.getInstanz().getKalender().loadTermin(new Termin(termine.getInt("terminID"), termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
 							termine.getString("Farbe"), termine.getString("Ort"), termine.getString("Notiz"), termine.getString("Icon")));
 				}
 			}
