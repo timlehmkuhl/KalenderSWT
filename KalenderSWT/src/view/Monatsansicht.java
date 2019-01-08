@@ -141,7 +141,7 @@ public class Monatsansicht {
 			int tag = i-1;
 			buttonList.get(tag).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					Tagesansicht.startTagesansicht(tag);
+					Tagesansicht.startTagesansicht(User.getInstanz().getKalender().termineDesTages(tag));
 				}
 			});
 		}
