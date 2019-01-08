@@ -14,6 +14,8 @@ import model.User;
 
 import java.awt.GridLayout;
 import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -95,7 +97,7 @@ public class Monatsansicht {
 		menuPanel.add(einladungen);
 		einladungen.setFont(FONT);
 		
-		JButton naechsterMonat = new JButton("Nächster Monat");
+		JButton naechsterMonat = new JButton("Naechster Monat");
 		menuPanel.add(naechsterMonat);
 		naechsterMonat.setFont(FONT);
 		
@@ -136,6 +138,11 @@ public class Monatsansicht {
 			//buttonList.get(i).setBackground(Color.WHITE);
 			//buttonList.get(i).setFont(FONT);
 			//tagePanel.add(buttonList.get(i));
+			buttonList.get(i).addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					System.exit(0);
+				}
+			});
 		}
 	/*	
 		//Tage mit Termin bekommen eine Rote Zahl
