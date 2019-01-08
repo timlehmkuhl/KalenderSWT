@@ -10,9 +10,10 @@ public class User {
 	private static User loggedIn = null;
 	private int MonthViewed;
 	private int YearViewed;
+	private int DayViewed;
 	private static final String[] MonatsName = {"Januar", "Februar", "Maerz", "April", "Mai", "Juni", "Juli", "August", "Sepetember",
 			"Oktober", "November", "Dezember"};
-	
+	private static final String[] WochenTage = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Sammstag", "Sonntag"};
 	
 	private User(String Username, Kalender kalender) {
 		this.Username = Username;
@@ -84,10 +85,20 @@ public class User {
 		}
 	}
 	
-	public static String getMonthName(int month) {
+	public int getDayViewed() {
+		return DayViewed;
+	}
 	
+	public void setDayViewed(int day) {
+		DayViewed = day;
+	}
+	
+	public static String getMonthName(int month) {
 		return MonatsName[month];
-		
+	}
+	public static String getDayName(int day) {
+		day--;
+		return WochenTage[day];
 	}
 	
 }

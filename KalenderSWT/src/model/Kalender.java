@@ -66,7 +66,6 @@ public class Kalender {
 		int month = User.getInstanz().getMonthViewed();
 		for(Termin t : termine) {
 			c.setTime(t.getStartZeit());
-			System.out.println(Integer.toString(c.get(Calendar.DAY_OF_MONTH)) + " " + Integer.toString(day) + " " + Integer.toString(c.get(Calendar.YEAR)) + " " + Integer.toString(year) + " " + Integer.toString(month) + " " + Integer.toString(c.get(Calendar.MONTH)));
 			if(c.get(Calendar.DAY_OF_MONTH) == day && c.get(Calendar.YEAR) == year && c.get(Calendar.MONTH) == month) {
 				return true;
 			}
@@ -75,17 +74,22 @@ public class Kalender {
 	}
 	
 	public List<Termin> termineDesTages(int day){
-		List<Termin> termine = new LinkedList<Termin>();
+		List<Termin> termineU = new LinkedList<Termin>();
 		Calendar c = Calendar.getInstance();
 		int year = User.getInstanz().getYearViewed();
 		int month = User.getInstanz().getMonthViewed();
+		
+		
+		
 		for(Termin t : termine) {
+			
 			c.setTime(t.getStartZeit());
+			
 			if(c.get(Calendar.DAY_OF_MONTH) == day && c.get(Calendar.MONTH) == month && c.get(Calendar.YEAR) == year) {
-				termine.add(t);
+				termineU.add(t);
 			}
 		}
-		return termine;
+		return termineU;
 	}
 	
 }

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import model.Termin;
+import model.User;
 
 import java.awt.GridLayout;
 import java.awt.Panel;
@@ -34,6 +35,7 @@ public class Tagesansicht {
 	 */
 //	public static void main(String[] args) {
 	public static void startTagesansicht(List<Termin> tagesTermine) {
+			
 		termine = tagesTermine;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -82,11 +84,11 @@ public class Tagesansicht {
 		rechtsPanel.setLayout(rechts);
 
 				
-		JButton terminHinzufuegen = new JButton("Termin Hinzuf�gen");
+		JButton terminHinzufuegen = new JButton("Termin Hinzufuegen");
 		untenPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		
-		JButton zurueck = new JButton("Zur�ck");
+		JButton zurueck = new JButton("Zurueck");
 		untenPanel.add(zurueck);
 		zurueck.setFont(FONT);
 		
@@ -94,7 +96,7 @@ public class Tagesansicht {
 		frame.getContentPane().add(untenPanel, BorderLayout.SOUTH);
 		
 		
-		Tag=new JLabel("Heute");
+		Tag=new JLabel((Integer.toString(User.getInstanz().getDayViewed())).concat("/").concat(Integer.toString(User.getInstanz().getMonthViewed()+1)));
 		obenPanel.add(Tag);
 		Tag.setFont(ueberschrift);
 		
@@ -125,7 +127,7 @@ String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
 			buttonListZeit.add(new JLabel(s, SwingConstants.CENTER));
 		}
 		buttonListZeit.stream().forEach(x -> x.setFont(FONT));
-		buttonTermin.stream().forEach(x->linksPanel.add(x));
+		buttonTermin.stream().forEach(x -> linksPanel.add(x));
 		buttonListZeit.stream().forEach(x -> linksPanel.add(x));
 		
 		frame.getContentPane().add(linksPanel, BorderLayout.WEST);
