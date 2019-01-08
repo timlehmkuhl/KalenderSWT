@@ -27,11 +27,15 @@ import model.User;
 
 public class TerminErstellen extends JFrame {
 
-	public static void terminErstellen() {
+	public static void terminErstellen(Monatsansicht m) {
 		terminerstellen = new TerminErstellen();
 		terminerstellen.setBackground(Color.WHITE);
+		mSicht = m;
 	}
 	static JFrame terminerstellen;
+	static Monatsansicht mSicht;
+	
+	
 	JLabel ueberschrift;
 
 	JLabel name;
@@ -354,6 +358,7 @@ public class TerminErstellen extends JFrame {
 					Timestamp end = Timestamp.valueOf(jahr + "-" + monat + "-" + tag + " " + stunde + ":" + minute + ":" + "10.0");
 					
 					User.getInstanz().addTermin(new Termin(namefeld.getText(), begin, end, null, null, null, null));
+					mSicht.refreshView();
 					terminerstellen.dispose();
 				}
 			}

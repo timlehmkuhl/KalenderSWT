@@ -37,14 +37,24 @@ public class Monatsansicht {
 			public void run() {
 				try {
 					Monatsansicht window = new Monatsansicht();
+					windowP = window;
 					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
+	static Monatsansicht windowP;
+	
+	public void refreshView() {
+		frame.dispose();
+		Monatsansicht window = new Monatsansicht();
+		JFrame frame = new JFrame();
+		window.frame.setVisible(true);
+		windowP = window;
+	}
 	/**
 	 * Create the application. BY ECLIPSE
 	 */
@@ -86,7 +96,7 @@ public class Monatsansicht {
 		terminHinzufuegen.setFont(FONT);
 		terminHinzufuegen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				TerminErstellen.terminErstellen();
+				TerminErstellen.terminErstellen(windowP);
 			}
 		});
 		
@@ -108,10 +118,7 @@ public class Monatsansicht {
 		naechsterMonat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				User.getInstanz().viewNextMonth();
-				frame.setVisible(false);
-				Monatsansicht next = new Monatsansicht();
-				JFrame frame = new JFrame();
-				next.frame.setVisible(true);
+				refreshView();
 			}
 		});
 		
@@ -121,10 +128,7 @@ public class Monatsansicht {
 		vorherigerMonat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				User.getInstanz().viewPrevMonth();
-				frame.setVisible(false);
-				Monatsansicht next = new Monatsansicht();
-				JFrame frame = new JFrame();
-				next.frame.setVisible(true);
+				refreshView();
 			}
 		});
 		
