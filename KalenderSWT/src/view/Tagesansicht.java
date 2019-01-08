@@ -15,6 +15,8 @@ import model.User;
 
 import java.awt.GridLayout;
 import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class Tagesansicht {
 	
 	public List<JLabel> buttonListZeit = new LinkedList<>();
 	public List<JLabel> buttonList = new LinkedList<>();
-	public List<JButton> buttonTermin = new LinkedList<>();
+	public List<JLabel> buttonTermin = new LinkedList<>();
 	private static final Font FONT = new Font("Sans Serif", Font.BOLD, 18);
 	private static final Font ueberschrift = new Font("Sans Serif", Font.BOLD, 72);
 	private JFrame frame;
@@ -42,6 +44,7 @@ public class Tagesansicht {
 			public void run() {
 				try {
 					Tagesansicht window = new Tagesansicht();
+					windowP = window;
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,6 +53,7 @@ public class Tagesansicht {
 		});
 	}
 
+	static Tagesansicht windowP;
 	/**
 	 * Create the application. BY ECLIPSE
 	 */
@@ -57,6 +61,15 @@ public class Tagesansicht {
 		initialize();
 	}
 
+	
+	public void refreshView() {
+		
+		termine = User.getInstanz().getKalender().termineDesTages(User.getInstanz().getDayViewed());
+		windowP.frame.dispose();
+		Tagesansicht window = new Tagesansicht();
+		windowP = window;
+		window.frame.setVisible(true);
+	}
 	/**
 	 * Initialize the contents of the frame. SELBER ANGEPASST
 	 */
@@ -76,7 +89,7 @@ public class Tagesansicht {
 		GridLayout links = new GridLayout(5, 1, 0, 0);
 		GridLayout oben = new GridLayout(1, 1, 0, 0);
 		GridLayout unten = new GridLayout(1, 2, 60, 10);
-		GridLayout rechts = new GridLayout(termine.size(), 1, 0, 0);
+		GridLayout rechts = new GridLayout(4, 4, 0, 0);
 		
 		
 		
@@ -90,6 +103,11 @@ public class Tagesansicht {
 		JButton terminHinzufuegen = new JButton("Termin Hinzufuegen");
 		untenPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
+		terminHinzufuegen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				TerminErstellen.terminErstellen(windowP);
+			}
+		});
 		
 		JButton zurueck = new JButton("Zurueck");
 		untenPanel.add(zurueck);
@@ -115,10 +133,18 @@ public class Tagesansicht {
 			Calendar c = Calendar.getInstance();
 			c.setTime(termine.get(i).getStartZeit());
 			String stunde =	Integer.toString(c.get(Calendar.HOUR_OF_DAY));
-			String minuten = Integer.toString(c.get(Calendar.MINUTE));
+			String minuten = String.format("%02d", c.get(Calendar.MINUTE));
 			String name = termine.get(i).getName().toString();
-			String ort = termine.get(i).getOrt().toString();
-			buttonTermin.add(new JButton(stunde + ":" + minuten + " " + name + ", Ort: " + ort));
+			
+			String ort = "keiner";
+			String notiz = "keine";
+			if (termine.get(i).getOrt() != null)
+				ort = termine.get(i).getOrt().toString();
+			if(termine.get(i).getNotiz() != null)
+				notiz = termine.get(i).getNotiz().toString();
+			
+			buttonTermin.add(new JLabel("<html>" + stunde + ":" + minuten + " Uhr <p/>" + name + "<p/>Ort: " + ort + "<p/> Notiz: " + notiz + "</html>", SwingConstants.CENTER));
+			buttonTermin.get(i).setFont(new Font("Areal", Font.BOLD, 18));
 		}
 		
 		

@@ -123,16 +123,18 @@ public class Datenbank {
 	}
 
 	public void syncMonth(int month, int year){
+		month++;
 		try {
 			String getTermine = "select * from " + User.getInstanz().getUsername() + " WHERE MONTH(startZeit) = " + month + " AND YEAR(startZeit) = " + year;
 			java.sql.Statement stmt3 = connection.createStatement();
-			
+			System.err.println(getTermine);
 			ResultSet termine = stmt3.executeQuery(getTermine);
-			
+			System.err.println("Sync Executed");
 			while (termine.next()) {
 				if(!User.getInstanz().getKalender().terminLoaded(termine.getInt("terminID"))) {
 					User.getInstanz().getKalender().loadTermin(new Termin(termine.getInt("terminID"), termine.getString("name"), termine.getTimestamp("startZeit"), termine.getTimestamp("endZeit"), 
 							termine.getString("Farbe"), termine.getString("Ort"), termine.getString("Notiz"), termine.getString("Icon")));
+					System.err.println(termine);
 				}
 			}
 			

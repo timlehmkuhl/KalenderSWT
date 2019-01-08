@@ -112,15 +112,7 @@ public class Monatsansicht {
 		menuPanel.add(einladungen);
 		einladungen.setFont(FONT);
 		
-		JButton naechsterMonat = new JButton("Naechster Monat");
-		menuPanel.add(naechsterMonat);
-		naechsterMonat.setFont(FONT);
-		naechsterMonat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				User.getInstanz().viewNextMonth();
-				refreshView();
-			}
-		});
+		
 		
 		JButton vorherigerMonat = new JButton("Vorheriger Monat");
 		menuPanel.add(vorherigerMonat);
@@ -128,6 +120,16 @@ public class Monatsansicht {
 		vorherigerMonat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				User.getInstanz().viewPrevMonth();
+				refreshView();
+			}
+		});
+		
+		JButton naechsterMonat = new JButton("Naechster Monat");
+		menuPanel.add(naechsterMonat);
+		naechsterMonat.setFont(FONT);
+		naechsterMonat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				User.getInstanz().viewNextMonth();
 				refreshView();
 			}
 		});

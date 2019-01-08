@@ -59,13 +59,13 @@ public class User {
 		return MonthViewed;
 	}
 	
-	public void setView(int Month, int Year) {
-		if(Month >= 1 && Month <= 12 ) {
-			MonthViewed = Month;
-			YearViewed = Year;
-			Datenbank.getInstanz().syncMonth(MonthViewed, YearViewed);
-		}
-	}
+//	public void setView(int Month, int Year) {
+//		if(Month >= 1 && Month <= 12 ) {
+//			MonthViewed = Month;
+//			YearViewed = Year;
+//			Datenbank.getInstanz().syncMonth(MonthViewed, YearViewed);
+//		}
+//	}
 	
 	public void viewNextMonth() {
 		if(MonthViewed == 11) {
@@ -84,6 +84,7 @@ public class User {
 		} else {
 			MonthViewed--;
 		}
+		System.err.println("prev" + MonthViewed + " " + YearViewed );
 		Datenbank.getInstanz().syncMonth(MonthViewed, YearViewed);
 	}
 	

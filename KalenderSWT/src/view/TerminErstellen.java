@@ -31,10 +31,19 @@ public class TerminErstellen extends JFrame {
 		terminerstellen = new TerminErstellen();
 		terminerstellen.setBackground(Color.WHITE);
 		mSicht = m;
+		Month = true;
 	}
+	public static void terminErstellen(Tagesansicht m) {
+		terminerstellen = new TerminErstellen();
+		terminerstellen.setBackground(Color.WHITE);
+		tSicht = m;
+		Month = false;
+	}
+	
+	static boolean Month;
 	static JFrame terminerstellen;
 	static Monatsansicht mSicht;
-	
+	static Tagesansicht tSicht;
 	
 	JLabel ueberschrift;
 
@@ -376,7 +385,11 @@ public class TerminErstellen extends JFrame {
 					System.err.println(hex);
 					
 					User.getInstanz().addTermin(new Termin(namefeld.getText(), begin, end, hex, ort, notiz, null));
-					mSicht.refreshView();
+					if(Month) {
+						mSicht.refreshView();
+					} else {
+						tSicht.refreshView();
+					}
 					terminerstellen.dispose();
 				}
 			}
