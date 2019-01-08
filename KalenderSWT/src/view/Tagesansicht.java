@@ -76,7 +76,7 @@ public class Tagesansicht {
 		GridLayout links = new GridLayout(5, 1, 0, 0);
 		GridLayout oben = new GridLayout(1, 1, 0, 0);
 		GridLayout unten = new GridLayout(1, 2, 60, 10);
-		GridLayout rechts = new GridLayout(24, 1, 0, 0);
+		GridLayout rechts = new GridLayout(termine.size(), 1, 0, 0);
 		
 		
 		
@@ -109,26 +109,21 @@ public class Tagesansicht {
 		frame.getContentPane().add(obenPanel, BorderLayout.NORTH);
 		
 		
-		/*for (int i = 1; i <= 6; i++) {
-			buttonList.add(new JButton(String.valueOf(i)));
-		}
-		buttonList.stream().forEach(x -> x.setBackground(Color.WHITE));
-		buttonList.stream().forEach(x -> x.setFont(FONT));
 		
-		frame.getContentPane().add(untenPanel, BorderLayout.EAST);
-		*/
 		
 		for (int i = 0; i < termine.size(); i++) {
 			Calendar c = Calendar.getInstance();
 			c.setTime(termine.get(i).getStartZeit());
 			String stunde =	Integer.toString(c.get(Calendar.HOUR_OF_DAY));
-			
-			buttonTermin.add(new JButton(stunde + termine.get(i).getStartZeit().toString()));
+			String minuten = Integer.toString(c.get(Calendar.MINUTE));
+			String name = termine.get(i).getName().toString();
+			String ort = termine.get(i).getOrt().toString();
+			buttonTermin.add(new JButton(stunde + ":" + minuten + " " + name + ", Ort: " + ort));
 		}
 		
 		
 		
-String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
+/*String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
 		
 		for (String s: Zeit) {
 			buttonListZeit.add(new JLabel(s, SwingConstants.CENTER));
@@ -136,22 +131,17 @@ String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
 		buttonListZeit.stream().forEach(x -> x.setFont(FONT));
 		
 		buttonListZeit.stream().forEach(x -> linksPanel.add(x));
+		*/
+	//	buttonTermin.stream().forEach(x -> x.setSize(width, height););
+		
+		
+		buttonTermin.stream().forEach(x -> rechtsPanel.add(x));
 		
 		frame.getContentPane().add(linksPanel, BorderLayout.WEST);
-		frame.getContentPane().add(rechtsPanel, BorderLayout.EAST);
+		frame.getContentPane().add(rechtsPanel, BorderLayout.CENTER);
 	
-		for (int i = 0; i < 24; i++) {
-			for (int j = 0; j < termine.size(); j++) {
-				if (buttonTermin.get(j).getText().substring(0, 1).equals((i + ""))) {
-					rechtsPanel.add(buttonTermin.get(j));
-
-				} else {
-					JButton platzhalter = new JButton("platz");
-					rechtsPanel.add(platzhalter);
-					platzhalter.setVisible(false);
-					//hallo
-				}
-			}
-		}
+		
+			
+		
 	}
 }
