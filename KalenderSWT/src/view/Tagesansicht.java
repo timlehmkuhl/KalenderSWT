@@ -69,7 +69,7 @@ public class Tagesansicht {
 		JPanel obenPanel = new JPanel();
 		JPanel rechtsPanel = new JPanel();
 		
-		GridLayout links = new GridLayout(15, 1, 0, 0);
+		GridLayout links = new GridLayout(5+termine.size(), 1, 0, 0);
 		GridLayout oben = new GridLayout(1, 1, 0, 0);
 		GridLayout unten = new GridLayout(1, 2, 60, 10);
 		GridLayout rechts = new GridLayout(1, 1, 60, 0);
