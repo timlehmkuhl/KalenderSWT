@@ -121,6 +121,7 @@ public class Monatsansicht {
 			//tagePanel.add(buttonList.get(i));
 		}
 		
+		//Tage mit Termin bekommen eine Rote Zahl
 		for(int i : User.getInstanz().getKalender().DaysNotFree()) {
 			buttonList.get(i-1).setForeground(Color.RED);
 		}

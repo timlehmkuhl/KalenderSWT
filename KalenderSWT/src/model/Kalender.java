@@ -35,13 +35,15 @@ public class Kalender {
 		return temp;
 	}
 	
-	public boolean terminLoaded(int terminID) {
+	//Damit keine Termine doppelt aus der db geladen werden
+	public boolean terminLoaded(int terminID) {	
 		for(Termin t : termine) {
 			if(t.getID() == terminID) return true;
 		}
 		return false;
 	}
 	
+	//Erstellt eine Liste mit allen Tagen des angezeigten Monats, an denen es Termine gibt
 	public List<Integer> DaysNotFree(){
 		List<Integer> days = new ArrayList<Integer>();
 		Calendar c = Calendar.getInstance();
@@ -56,6 +58,8 @@ public class Kalender {
 		return days;
 	}
 	
+	//Prueft ob es an einem bestimmten Tag ein Termin gibt (Methode wurde durch DaysNotFree ersetzt, 
+	//wird zunächst nicht mehr benötigt	
 	public boolean terminOnDay(int day) {
 		Calendar c = Calendar.getInstance();
 		int year = User.getInstanz().getYearViewed();
