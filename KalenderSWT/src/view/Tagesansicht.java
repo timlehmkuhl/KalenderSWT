@@ -28,7 +28,7 @@ public class Tagesansicht {
 	/**
 	 * Launch the application.. BY ECLIPSE 
 	 */
-	public static void main(String[] args) {
+	public static void startTagesansicht(int Tag) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
