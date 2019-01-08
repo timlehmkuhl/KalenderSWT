@@ -138,9 +138,10 @@ public class Monatsansicht {
 			//buttonList.get(i).setBackground(Color.WHITE);
 			//buttonList.get(i).setFont(FONT);
 			//tagePanel.add(buttonList.get(i));
-			buttonList.get(i-1).addActionListener(new ActionListener() {
+			int tag = i-1;
+			buttonList.get(tag).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					Tagesansicht.main(null);
+					Tagesansicht.startTagesansicht(tag);
 				}
 			});
 		}

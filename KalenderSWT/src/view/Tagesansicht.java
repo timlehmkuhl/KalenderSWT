@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import model.Termin;
+
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.util.LinkedList;
@@ -28,7 +30,7 @@ public class Tagesansicht {
 	/**
 	 * Launch the application.. BY ECLIPSE 
 	 */
-	public static void startTagesansicht(int Tag) {
+	public static void startTagesansicht(List<Termin> tagesTermine) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
