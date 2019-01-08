@@ -346,7 +346,7 @@ public class TerminErstellen extends JFrame {
 		speichern.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				if(!namefeld.getText().isEmpty()) {
-					String jahr = "2019";
+					String jahr = ""+ (jahrfeld.getSelectedIndex()+2010);
 					String monat = "" + (monatfeld.getSelectedIndex() + 1);
 					String tag = "" + (datumfeld.getSelectedIndex() + 1);
 					String stunde = "" + stdbeginnfeld.getSelectedIndex();
@@ -357,7 +357,25 @@ public class TerminErstellen extends JFrame {
 					minute = "" + minendefeld.getSelectedIndex();
 					Timestamp end = Timestamp.valueOf(jahr + "-" + monat + "-" + tag + " " + stunde + ":" + minute + ":" + "10.0");
 					
-					User.getInstanz().addTermin(new Termin(namefeld.getText(), begin, end, null, null, null, null));
+					String ort;
+					if(ortfeld.getText().isEmpty()) {
+						ort = null;
+					} else {
+						ort = ortfeld.getText();
+					}
+					
+					String notiz;
+					if(notizfeld.getText().isEmpty()) {
+						notiz = null;
+					} else {
+						notiz = notizfeld.getText();
+					}
+					
+					Color c = farbwahl.getBackground();
+					String hex = String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue());  
+					System.err.println(hex);
+					
+					User.getInstanz().addTermin(new Termin(namefeld.getText(), begin, end, hex, ort, notiz, null));
 					mSicht.refreshView();
 					terminerstellen.dispose();
 				}
