@@ -35,7 +35,7 @@ public class Tagesansicht {
 	 */
 //	public static void main(String[] args) {
 	public static void startTagesansicht(List<Termin> tagesTermine) {
-			
+		
 		termine = tagesTermine;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -59,6 +59,7 @@ public class Tagesansicht {
 	/**
 	 * Initialize the contents of the frame. SELBER ANGEPASST
 	 */
+	@SuppressWarnings("deprecation")
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1333, 1000);
@@ -71,10 +72,10 @@ public class Tagesansicht {
 		JPanel obenPanel = new JPanel();
 		JPanel rechtsPanel = new JPanel();
 		
-		GridLayout links = new GridLayout(5+termine.size(), 1, 0, 0);
+		GridLayout links = new GridLayout(5, 1, 0, 0);
 		GridLayout oben = new GridLayout(1, 1, 0, 0);
 		GridLayout unten = new GridLayout(1, 2, 60, 10);
-		GridLayout rechts = new GridLayout(1, 1, 60, 0);
+		GridLayout rechts = new GridLayout(24, 1, 0, 0);
 		
 		
 		
@@ -82,7 +83,8 @@ public class Tagesansicht {
 		obenPanel.setLayout(oben);
 		untenPanel.setLayout(unten);
 		rechtsPanel.setLayout(rechts);
-
+		
+		
 				
 		JButton terminHinzufuegen = new JButton("Termin Hinzufuegen");
 		untenPanel.add(terminHinzufuegen);
@@ -116,7 +118,9 @@ public class Tagesansicht {
 		*/
 		
 		for (int i = 0; i < termine.size(); i++) {
-			buttonTermin.add(new JButton(termine.get(i).getStartZeit().toString()));
+			String stunde =	termine.get(i).getStartZeit().toGMTString();
+			
+			buttonTermin.add(new JButton(stunde + termine.get(i).getStartZeit().toString()));
 		}
 		
 		
@@ -127,12 +131,23 @@ String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
 			buttonListZeit.add(new JLabel(s, SwingConstants.CENTER));
 		}
 		buttonListZeit.stream().forEach(x -> x.setFont(FONT));
-		buttonTermin.stream().forEach(x -> linksPanel.add(x));
+		
 		buttonListZeit.stream().forEach(x -> linksPanel.add(x));
 		
 		frame.getContentPane().add(linksPanel, BorderLayout.WEST);
-	}
+		frame.getContentPane().add(rechtsPanel, BorderLayout.EAST);
 	
-	
+		for (int i = 0; i < 24; i++) {
+			for (int j = 0; j < termine.size(); j++) {
+				if (buttonTermin.get(j).getText().substring(0, 1).equals((i + ""))) {
+					rechtsPanel.add(buttonTermin.get(j));
 
+				} else {
+					JButton platzhalter = new JButton("platz");
+					rechtsPanel.add(platzhalter);
+					platzhalter.setVisible(false);
+				}
+			}
+		}
+	}
 }
