@@ -68,21 +68,23 @@ public class User {
 	}
 	
 	public void viewNextMonth() {
-		if(MonthViewed == 12) {
+		if(MonthViewed == 11) {
 			MonthViewed = 0;
 			YearViewed++;
 		} else {
 			MonthViewed++;
 		}
+		Datenbank.getInstanz().syncMonth(MonthViewed, YearViewed);
 	}
 	
 	public void viewPrevMonth() {
-		if(MonthViewed == 1) {
-			MonthViewed = 12;
+		if(MonthViewed == 0) {
+			MonthViewed = 11;
 			YearViewed--;
 		} else {
 			MonthViewed--;
 		}
+		Datenbank.getInstanz().syncMonth(MonthViewed, YearViewed);
 	}
 	
 	public int getDayViewed() {

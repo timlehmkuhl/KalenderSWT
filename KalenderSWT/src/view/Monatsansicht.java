@@ -81,7 +81,7 @@ public class Monatsansicht {
 		
 
 		
-		JButton terminHinzufuegen = new JButton("Termin hinzuf�gen");
+		JButton terminHinzufuegen = new JButton("Termin hinzufuegen");
 		menuPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		
@@ -100,11 +100,28 @@ public class Monatsansicht {
 		JButton naechsterMonat = new JButton("Naechster Monat");
 		menuPanel.add(naechsterMonat);
 		naechsterMonat.setFont(FONT);
+		naechsterMonat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				User.getInstanz().viewNextMonth();
+				frame.setVisible(false);
+				Monatsansicht next = new Monatsansicht();
+				JFrame frame = new JFrame();
+				next.frame.setVisible(true);
+			}
+		});
 		
 		JButton vorherigerMonat = new JButton("Vorheriger Monat");
 		menuPanel.add(vorherigerMonat);
 		vorherigerMonat.setFont(FONT);
-		
+		vorherigerMonat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				User.getInstanz().viewPrevMonth();
+				frame.setVisible(false);
+				Monatsansicht next = new Monatsansicht();
+				JFrame frame = new JFrame();
+				next.frame.setVisible(true);
+			}
+		});
 		
 		JLabel monat = new JLabel(User.getMonthName(User.getInstanz().getMonthViewed()).concat(Integer.toString(User.getInstanz().getYearViewed())), SwingConstants.CENTER);
 		menuPanel.add(monat);
