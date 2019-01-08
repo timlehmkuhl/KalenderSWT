@@ -146,6 +146,7 @@ String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
 					JButton platzhalter = new JButton("platz");
 					rechtsPanel.add(platzhalter);
 					platzhalter.setVisible(false);
+					//hallo
 				}
 			}
 		}
