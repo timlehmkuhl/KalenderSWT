@@ -105,7 +105,8 @@ public class Monatsansicht {
 		menuPanel.add(vorherigerMonat);
 		vorherigerMonat.setFont(FONT);
 		
-		JLabel monat = new JLabel("Monat", SwingConstants.CENTER);
+		
+		JLabel monat = new JLabel(User.getMonthName(User.getInstanz().getMonthViewed()).concat(Integer.toString(User.getInstanz().getYearViewed())), SwingConstants.CENTER);
 		menuPanel.add(monat);
 		monat.setFont(FONTMONAT);
 		

@@ -10,6 +10,9 @@ public class User {
 	private static User loggedIn = null;
 	private int MonthViewed;
 	private int YearViewed;
+	private static final String[] MonatsName = {"Januar", "Februar", "Maerz", "April", "Mai", "Juni", "Juli", "August", "Sepetember",
+			"Oktober", "November", "Dezember"};
+	
 	
 	private User(String Username, Kalender kalender) {
 		this.Username = Username;
@@ -61,6 +64,30 @@ public class User {
 			YearViewed = Year;
 			Datenbank.getInstanz().syncMonth(MonthViewed, YearViewed);
 		}
+	}
+	
+	public void viewNextMonth() {
+		if(MonthViewed == 12) {
+			MonthViewed = 0;
+			YearViewed++;
+		} else {
+			MonthViewed++;
+		}
+	}
+	
+	public void viewPrevMonth() {
+		if(MonthViewed == 1) {
+			MonthViewed = 12;
+			YearViewed--;
+		} else {
+			MonthViewed--;
+		}
+	}
+	
+	public static String getMonthName(int month) {
+	
+		return MonatsName[month];
+		
 	}
 	
 }
