@@ -23,14 +23,18 @@ public class Tagesansicht {
 	
 	public List<JLabel> buttonListZeit = new LinkedList<>();
 	public List<JLabel> buttonList = new LinkedList<>();
+	public List<JButton> buttonTermin = new LinkedList<>();
 	private static final Font FONT = new Font("Sans Serif", Font.BOLD, 18);
 	private static final Font ueberschrift = new Font("Sans Serif", Font.BOLD, 72);
 	private JFrame frame;
+	private static List<Termin> termine = new LinkedList<>();;
 
 	/**
 	 * Launch the application.. BY ECLIPSE 
 	 */
+//	public static void main(String[] args) {
 	public static void startTagesansicht(List<Termin> tagesTermine) {
+		termine = tagesTermine;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -65,7 +69,7 @@ public class Tagesansicht {
 		JPanel obenPanel = new JPanel();
 		JPanel rechtsPanel = new JPanel();
 		
-		GridLayout links = new GridLayout(-15, 1, 0, 0);
+		GridLayout links = new GridLayout(5+termine.size(), 1, 0, 0);
 		GridLayout oben = new GridLayout(1, 1, 0, 0);
 		GridLayout unten = new GridLayout(1, 2, 60, 10);
 		GridLayout rechts = new GridLayout(1, 1, 60, 0);
@@ -78,11 +82,11 @@ public class Tagesansicht {
 		rechtsPanel.setLayout(rechts);
 
 				
-		JButton terminHinzufuegen = new JButton("Termin Hinzufügen");
+		JButton terminHinzufuegen = new JButton("Termin Hinzufï¿½gen");
 		untenPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		
-		JButton zurueck = new JButton("Zurück");
+		JButton zurueck = new JButton("Zurï¿½ck");
 		untenPanel.add(zurueck);
 		zurueck.setFont(FONT);
 		
@@ -109,12 +113,19 @@ public class Tagesansicht {
 		frame.getContentPane().add(untenPanel, BorderLayout.EAST);
 		*/
 		
+		for (int i = 0; i < termine.size(); i++) {
+			buttonTermin.add(new JButton(termine.get(i).getStartZeit().toString()));
+		}
+		
+		
+		
 String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
 		
 		for (String s: Zeit) {
 			buttonListZeit.add(new JLabel(s, SwingConstants.CENTER));
 		}
 		buttonListZeit.stream().forEach(x -> x.setFont(FONT));
+		buttonTermin.stream().forEach(x->linksPanel.add(x));
 		buttonListZeit.stream().forEach(x -> linksPanel.add(x));
 		
 		frame.getContentPane().add(linksPanel, BorderLayout.WEST);
