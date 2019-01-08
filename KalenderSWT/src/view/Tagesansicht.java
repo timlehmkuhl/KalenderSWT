@@ -112,6 +112,12 @@ public class Tagesansicht {
 		JButton zurueck = new JButton("Zurueck");
 		untenPanel.add(zurueck);
 		zurueck.setFont(FONT);
+		zurueck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				windowP.frame.dispose();
+				Monatsansicht.main(null);
+			}
+		});
 		
 		untenPanel.setPreferredSize(new Dimension(200, 80));
 		frame.getContentPane().add(untenPanel, BorderLayout.SOUTH);

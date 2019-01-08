@@ -170,6 +170,7 @@ public class Monatsansicht {
 			int tag = i;
 			buttonList.get(tag -1).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
+					frame.dispose();
 					User.getInstanz().setDayViewed(tag);
 					Tagesansicht.startTagesansicht(User.getInstanz().getKalender().termineDesTages(tag));
 				}
