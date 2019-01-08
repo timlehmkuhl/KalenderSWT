@@ -27,7 +27,7 @@ public class MainToTest {
 		view.Monatsansicht.main(null);
 		
 		Datenbank.getInstanz().disconnect();
-
+		//dd
 	}
 
 }
