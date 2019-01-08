@@ -66,6 +66,8 @@ public class Monatsansicht {
 	 * Initialize the contents of the frame. SELBER ANGEPASST
 	 */
 	private void initialize() {
+		
+		User.getInstanz().setDayViewed(0);// Monatsansciht, nicht tagesansicht
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1333, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -162,7 +164,7 @@ public class Monatsansicht {
 		
 		
 		//ALLE TAGE ALS BUTTONS
-		for (int i = 1; i <= 35; i++) {
+		for (int i = 1; i <= 31; i++) {
 			buttonList.add(new JButton(String.valueOf(i)));
 			//buttonList.get(i).setBackground(Color.WHITE);
 			//buttonList.get(i).setFont(FONT);

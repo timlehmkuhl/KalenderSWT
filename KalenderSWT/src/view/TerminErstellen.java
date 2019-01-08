@@ -97,7 +97,7 @@ public class TerminErstellen extends JFrame {
 		setTitle("Termin erstellen");
 
 		// setAlwaysOnTop(true); // Fenster bleibt immer an erster Stelle.
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		/*
 		 * Überschrift
@@ -141,7 +141,12 @@ public class TerminErstellen extends JFrame {
 		}
 
 		datumfeld = new JComboBox(tagString.toArray());
-		datumfeld.setSelectedItem(1);
+		if(User.getInstanz().getDayViewed() != 0) {
+			datumfeld.setSelectedIndex(User.getInstanz().getDayViewed() - 1);
+		} else {
+			datumfeld.setSelectedItem(1);
+		}
+		
 		datumfeld.setBounds(148, 91, 89, 20);
 		datumfeld.setBackground(Color.WHITE);
 		add(datumfeld);
@@ -149,7 +154,9 @@ public class TerminErstellen extends JFrame {
 		String[] monatString = { "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September",
 				"Oktober", "November", "Dezember" };
 		monatfeld = new JComboBox(monatString);
-		monatfeld.setSelectedItem(1);
+				
+		monatfeld.setSelectedIndex(User.getInstanz().getMonthViewed());
+		
 		monatfeld.setBounds(256, 91, 89, 20);
 		monatfeld.setBackground(Color.WHITE);
 		add(monatfeld);
@@ -159,7 +166,9 @@ public class TerminErstellen extends JFrame {
 			jahre.add(jahresbegin + "");
 		}
 		jahrfeld = new JComboBox(jahre.toArray());
-		jahrfeld.setSelectedItem(1);
+		
+		jahrfeld.setSelectedIndex(User.getInstanz().getYearViewed() - 2010);
+	
 		jahrfeld.setBounds(359, 91, 130, 20);
 		jahrfeld.setBackground(Color.WHITE);
 		add(jahrfeld);
@@ -300,7 +309,7 @@ public class TerminErstellen extends JFrame {
 			public void actionPerformed(ActionEvent event) {
 				color = JColorChooser.showDialog(null, "Wähle eine Farbe für deinen Termin", color);
 				if (color == null)
-					color = (Color.RED);
+					color = (Color.BLACK);
 
 				farbwahl.setBackground(color);
 			}
@@ -406,7 +415,9 @@ public class TerminErstellen extends JFrame {
 				terminerstellen.dispose();
 			}
 		});
-
+		
+		
+		
 	} //,mv,xcmvn
 
 }

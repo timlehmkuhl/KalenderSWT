@@ -10,7 +10,7 @@ public class User {
 	private static User loggedIn = null;
 	private int MonthViewed;
 	private int YearViewed;
-	private int DayViewed;
+	private int DayViewed = 0;
 	private static final String[] MonatsName = {"Januar", "Februar", "Maerz", "April", "Mai", "Juni", "Juli", "August", "Sepetember",
 			"Oktober", "November", "Dezember"};
 	private static final String[] WochenTage = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Sammstag", "Sonntag"};

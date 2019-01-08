@@ -151,6 +151,13 @@ public class Tagesansicht {
 			
 			buttonTermin.add(new JLabel("<html>" + stunde + ":" + minuten + " Uhr <p/>" + name + "<p/>Ort: " + ort + "<p/> Notiz: " + notiz + "</html>", SwingConstants.CENTER));
 			buttonTermin.get(i).setFont(new Font("Areal", Font.BOLD, 18));
+			if(termine.get(i).getFarbe() != null) {
+				System.err.println(termine.get(i).getFarbe().substring(1));
+				Color bg = new Color(Integer.parseInt(termine.get(i).getFarbe().substring(1), 16), true);
+				buttonTermin.get(i).setForeground(bg);
+				
+			}
+			
 		}
 		
 		
