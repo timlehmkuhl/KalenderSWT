@@ -15,6 +15,7 @@ import model.User;
 
 import java.awt.GridLayout;
 import java.awt.Panel;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -118,7 +119,9 @@ public class Tagesansicht {
 		*/
 		
 		for (int i = 0; i < termine.size(); i++) {
-			String stunde =	termine.get(i).getStartZeit().toGMTString();
+			Calendar c = Calendar.getInstance();
+			c.setTime(termine.get(i).getStartZeit());
+			String stunde =	Integer.toString(c.get(Calendar.HOUR_OF_DAY));
 			
 			buttonTermin.add(new JButton(stunde + termine.get(i).getStartZeit().toString()));
 		}
