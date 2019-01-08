@@ -117,13 +117,15 @@ public class Tagesansicht {
 			buttonTermin.add(new JButton(termine.get(i).getStartZeit().toString()));
 		}
 		
+		
+		
 String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
 		
 		for (String s: Zeit) {
 			buttonListZeit.add(new JLabel(s, SwingConstants.CENTER));
 		}
 		buttonListZeit.stream().forEach(x -> x.setFont(FONT));
-		
+		buttonTermin.stream().forEach(x->linksPanel.add(x));
 		buttonListZeit.stream().forEach(x -> linksPanel.add(x));
 		
 		frame.getContentPane().add(linksPanel, BorderLayout.WEST);
