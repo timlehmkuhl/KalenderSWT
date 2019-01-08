@@ -24,6 +24,7 @@ public class Monatsansicht {
 	public List<JLabel> buttonListWochen = new LinkedList<>();
 	public List<JLabel> buttonListWochentage = new LinkedList<>();
 	private static final Font FONT = new Font("Sans Serif", Font.BOLD, 18);
+	private static final Font FONTMONAT = new Font("Sans Serif", Font.BOLD, 22);
 	private JFrame frame;
 
 	/**
@@ -63,7 +64,7 @@ public class Monatsansicht {
 		
 		GridLayout grid = new GridLayout(6, 7, 0, 0);
 		GridLayout gridWochen = new GridLayout(6, 1, 0, 0);
-		GridLayout gridMenu = new GridLayout(2, 2, 600, 10);
+		GridLayout gridMenu = new GridLayout(4, 2, 600, 10);
 
 		
 
@@ -78,7 +79,7 @@ public class Monatsansicht {
 		
 
 		
-		JButton terminHinzufuegen = new JButton("Termin hinzufügen");
+		JButton terminHinzufuegen = new JButton("Termin hinzufï¿½gen");
 		menuPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		
@@ -93,6 +94,22 @@ public class Monatsansicht {
 		JButton einladungen = new JButton("Einladungen");
 		menuPanel.add(einladungen);
 		einladungen.setFont(FONT);
+		
+		JButton naechsterMonat = new JButton("NÃ¤chster Monat");
+		menuPanel.add(naechsterMonat);
+		naechsterMonat.setFont(FONT);
+		
+		JButton vorherigerMonat = new JButton("Vorheriger Monat");
+		menuPanel.add(vorherigerMonat);
+		vorherigerMonat.setFont(FONT);
+		
+		JLabel monat = new JLabel("Monat", SwingConstants.CENTER);
+		menuPanel.add(monat);
+		monat.setFont(FONTMONAT);
+		
+		
+		
+		
 		
 	
 		
@@ -120,11 +137,11 @@ public class Monatsansicht {
 			//buttonList.get(i).setFont(FONT);
 			//tagePanel.add(buttonList.get(i));
 		}
-		
+	/*	
 		//Tage mit Termin bekommen eine Rote Zahl
 		for(int i : User.getInstanz().getKalender().DaysNotFree()) {
 			buttonList.get(i-1).setForeground(Color.RED);
-		}
+		}*/
 		
 		
 		buttonList.stream().forEach(x -> x.setBackground(Color.WHITE));
