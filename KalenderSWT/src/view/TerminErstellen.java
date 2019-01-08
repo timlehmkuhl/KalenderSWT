@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -21,8 +22,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import model.Termin;
+import model.User;
+
 public class TerminErstellen extends JFrame {
 
+	public static void terminErstellen() {
+		terminerstellen = new TerminErstellen();
+		terminerstellen.setBackground(Color.WHITE);
+	}
+	static JFrame terminerstellen;
 	JLabel ueberschrift;
 
 	JLabel name;
@@ -67,6 +76,8 @@ public class TerminErstellen extends JFrame {
 	JButton abbrechen;
 
 	public TerminErstellen() {
+		
+		
 		setLayout(null);
 		setVisible(true);
 		setSize(800, 650);
@@ -293,7 +304,7 @@ public class TerminErstellen extends JFrame {
 		einladen.setBounds(26, 330, 59, 16);
 		add(einladen);
 
-		String[] freunde = { "Diese Liste ist noch in Planung :-)" };
+		String[] freunde = { "Diese Funktion ist noch in Planung :-)" };
 
 		einladungsliste = new JList(freunde);
 		einladungsliste.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
@@ -328,6 +339,25 @@ public class TerminErstellen extends JFrame {
 		speichern.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 13));
 		speichern.setBackground(Color.WHITE);
 		add(speichern);
+		speichern.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				if(!namefeld.getText().isEmpty()) {
+					String jahr = "2019";
+					String monat = "" + (monatfeld.getSelectedIndex() + 1);
+					String tag = "" + (datumfeld.getSelectedIndex() + 1);
+					String stunde = "" + stdbeginnfeld.getSelectedIndex();
+					String minute = "" + minbeginnfeld.getSelectedIndex();
+					Timestamp begin = Timestamp.valueOf(jahr + "-" + monat + "-" + tag + " " + stunde + ":" + minute + ":" + "10.0");
+					
+					stunde = "" + stdendefeld.getSelectedIndex();
+					minute = "" + minendefeld.getSelectedIndex();
+					Timestamp end = Timestamp.valueOf(jahr + "-" + monat + "-" + tag + " " + stunde + ":" + minute + ":" + "10.0");
+					
+					User.getInstanz().addTermin(new Termin(namefeld.getText(), begin, end, null, null, null, null));
+					terminerstellen.dispose();
+				}
+			}
+		});
 
 		abbrechen = new JButton("Abbrechen");
 		abbrechen.setBounds(533, 555, 222, 35);
@@ -337,7 +367,7 @@ public class TerminErstellen extends JFrame {
 
 		abbrechen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				System.exit(0);
+				terminerstellen.dispose();
 			}
 		});
 

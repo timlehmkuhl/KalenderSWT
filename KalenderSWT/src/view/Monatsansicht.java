@@ -84,6 +84,11 @@ public class Monatsansicht {
 		JButton terminHinzufuegen = new JButton("Termin hinzufuegen");
 		menuPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
+		terminHinzufuegen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				TerminErstellen.terminErstellen();
+			}
+		});
 		
 		JButton suche = new JButton("Suche");
 		menuPanel.add(suche);
