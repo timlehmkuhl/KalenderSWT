@@ -138,17 +138,17 @@ public class Monatsansicht {
 			//buttonList.get(i).setBackground(Color.WHITE);
 			//buttonList.get(i).setFont(FONT);
 			//tagePanel.add(buttonList.get(i));
-			buttonList.get(i).addActionListener(new ActionListener() {
+			buttonList.get(i-1).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					System.exit(0);
+					Tagesansicht.main(null);
 				}
 			});
 		}
-	/*	
+		
 		//Tage mit Termin bekommen eine Rote Zahl
 		for(int i : User.getInstanz().getKalender().DaysNotFree()) {
 			buttonList.get(i-1).setForeground(Color.RED);
-		}*/
+		}
 		
 		
 		buttonList.stream().forEach(x -> x.setBackground(Color.WHITE));
