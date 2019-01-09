@@ -55,7 +55,7 @@ public class TerminErstellen extends JFrame {
 	JComboBox monatfeld;
 	JComboBox jahrfeld;
 
-	Color color = Color.RED;
+	Color color = Color.BLACK;
 
 	JLabel uhrzeit;
 

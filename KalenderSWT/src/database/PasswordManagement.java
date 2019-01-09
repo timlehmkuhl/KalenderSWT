@@ -1,5 +1,7 @@
 package database;
-
+/*Diese klasse wurde nicht selbst geschrieben sondern nur angepasst. Quelle:
+ *https://github.com/selwakowski/pracainz/blob/master/PracaInz_v01/src/com/howtodoinjava/hashing/password/demo/advanced/ReallyStrongSecuredPassword.java
+ */
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
