@@ -42,8 +42,14 @@ public class Datenbank {
 	public void connect() {
 		if(connection == null) {
 			try {
-				connection = DriverManager.getConnection("jdbc:mysql://localhost/SWT2018?user=Kalender&password=SWT2018&serverTimezone=CET");
+				connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306?user=kalender&password=swt2018/2019&serverTimezone=CET");
 				System.out.println("Connection Sucsessfull");
+				
+				String selectTable = "use swt20182019;";
+				java.sql.Statement stmt2 = connection.createStatement();
+				ResultSet termine = stmt2.executeQuery(selectTable);
+				
+				
 			} catch (SQLException ex){
 				ex.printStackTrace();
 			}
