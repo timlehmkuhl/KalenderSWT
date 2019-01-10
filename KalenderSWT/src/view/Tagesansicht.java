@@ -46,6 +46,7 @@ public class Tagesansicht {
 					Tagesansicht window = new Tagesansicht();
 					windowP = window;
 					window.frame.setVisible(true);
+					window.frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -69,6 +70,7 @@ public class Tagesansicht {
 		Tagesansicht window = new Tagesansicht();
 		windowP = window;
 		window.frame.setVisible(true);
+		window.frame.setLocationRelativeTo(null);
 	}
 	/**
 	 * Initialize the contents of the frame. SELBER ANGEPASST
@@ -140,6 +142,10 @@ public class Tagesansicht {
 			c.setTime(termine.get(i).getStartZeit());
 			String stunde =	Integer.toString(c.get(Calendar.HOUR_OF_DAY));
 			String minuten = String.format("%02d", c.get(Calendar.MINUTE));
+			
+			c.setTime(termine.get(i).getEndZeit());
+			String stundeEnd =	Integer.toString(c.get(Calendar.HOUR_OF_DAY));
+			String minutenEnd = String.format("%02d", c.get(Calendar.MINUTE));
 			String name = termine.get(i).getName().toString();
 			
 			String ort = "keiner";
@@ -149,7 +155,7 @@ public class Tagesansicht {
 			if(termine.get(i).getNotiz() != null)
 				notiz = termine.get(i).getNotiz().toString();
 			
-			buttonTermin.add(new JLabel("<html>" + stunde + ":" + minuten + " Uhr <p/>" + name + "<p/>Ort: " + ort + "<p/> Notiz: " + notiz + "</html>", SwingConstants.CENTER));
+			buttonTermin.add(new JLabel("<html>" + stunde + ":" + minuten + " Uhr bis " + stundeEnd + ":" + minutenEnd + " Uhr<p/>" + name + "<p/>Ort: " + ort + "<p/> Notiz: " + notiz + "</html>", SwingConstants.CENTER));
 			buttonTermin.get(i).setFont(new Font("Areal", Font.BOLD, 18));
 			if(termine.get(i).getFarbe() != null) {
 				System.err.println(termine.get(i).getFarbe().substring(1));

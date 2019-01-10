@@ -53,6 +53,7 @@ public class Monatsansicht {
 		Monatsansicht window = new Monatsansicht();
 		JFrame frame = new JFrame();
 		window.frame.setVisible(true);
+		window.frame.setLocationRelativeTo(null);
 		windowP = window;
 	}
 	/**
@@ -69,7 +70,10 @@ public class Monatsansicht {
 		
 		User.getInstanz().setDayViewed(0);// Monatsansciht, nicht tagesansicht
 		frame = new JFrame();
+		
 		frame.setBounds(100, 100, 1333, 1000);
+		
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel tagePanel = new JPanel();
@@ -136,7 +140,7 @@ public class Monatsansicht {
 			}
 		});
 		
-		JLabel monat = new JLabel(User.getMonthName(User.getInstanz().getMonthViewed()).concat(Integer.toString(User.getInstanz().getYearViewed())), SwingConstants.CENTER);
+		JLabel monat = new JLabel(User.getMonthName(User.getInstanz().getMonthViewed()).concat(" ").concat(Integer.toString(User.getInstanz().getYearViewed())), SwingConstants.CENTER);
 		menuPanel.add(monat);
 		monat.setFont(FONTMONAT);
 		
