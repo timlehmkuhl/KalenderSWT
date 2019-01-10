@@ -72,7 +72,28 @@ public class Monatsansicht {
 	public Monatsansicht() {
 		initialize();
 	}
-
+	
+	/**
+	 * Nur zum rotieren von Wochentagen also Arrays mit 7 Eintraegen
+	 * @param array
+	 * @param times
+	 * @return rotiertes Array
+	 */
+	private String[] rotate(String[] array, int times) {
+		String[] returnArray = new String[7];
+		int counter = times;
+		for(int i = 0; i <= 6; i++) {
+			returnArray[i] = array[counter];
+			if(counter >= 6) {
+				counter = 0;
+			} else {
+				counter++;
+			}
+			
+		}
+		return returnArray;
+		
+	}
 	/**
 	 * Frame inhalte laden
 	 */
@@ -184,7 +205,31 @@ public class Monatsansicht {
 		
 		
 		//WOCHENTAGE
+		
 		String wochentage[] = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"};
+		
+		Calendar c = Calendar.getInstance();
+		String m = String.format("%02d", User.getInstanz().getMonthViewed() + 1);
+		String values = Integer.toString(User.getInstanz().getYearViewed()) + "-" + m + "-01 11:10:10.0";
+		Timestamp firstDay = Timestamp.valueOf(values);
+		
+		c.setTime(firstDay);
+		if (c.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+			
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) {
+			wochentage = rotate(wochentage, 1);
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
+			wochentage = rotate(wochentage, 2);
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
+			wochentage = rotate(wochentage, 3);
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+			wochentage = rotate(wochentage, 4);
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			wochentage = rotate(wochentage, 5);
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+			wochentage = rotate(wochentage, 6);
+		}
+		
 		
 		for (String s: wochentage) {
 			buttonListWochentage.add(new JLabel(s, SwingConstants.CENTER));
@@ -221,13 +266,13 @@ public class Monatsansicht {
 		
 		
 		//WOCHENANZEIGE
-				Calendar c = Calendar.getInstance();
-				String m = String.format("%02d", User.getInstanz().getMonthViewed() + 1);
-				String s = Integer.toString(User.getInstanz().getYearViewed()) + "-" + m + "-01 11:10:10.0";
-				Timestamp firstDay = Timestamp.valueOf(s);
+				Calendar c1 = Calendar.getInstance();
+				String m1 = String.format("%02d", User.getInstanz().getMonthViewed() + 1);
+				String s = Integer.toString(User.getInstanz().getYearViewed()) + "-" + m1 + "-01 11:10:10.0";
+				Timestamp firstDay1 = Timestamp.valueOf(s);
 				
-				c.setTime(firstDay);
-				int w = c.get(Calendar.WEEK_OF_YEAR);
+				c1.setTime(firstDay1);
+				int w = c1.get(Calendar.WEEK_OF_YEAR);
 				System.err.println(w);
 				for (int j = 0; j <= 5; j++) {
 					buttonListWochen.add(new JLabel(String.valueOf("Woche " + (j + w - 1))));
