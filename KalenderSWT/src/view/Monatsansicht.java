@@ -25,7 +25,8 @@ public class Monatsansicht {
 	public List<JButton> buttonList = new LinkedList<>();
 	public List<JLabel> buttonListWochen = new LinkedList<>();
 	public List<JLabel> buttonListWochentage = new LinkedList<>();
-	private static final Font FONT = new Font("Sans Serif", Font.BOLD, 18);
+	private static final Font FONT = new Font("Sans Serif", Font.BOLD, 24);
+	private static final Font ButtonFont = new Font("Sans Serif", Font.BOLD, 42);
 	private static final Font FONTMONAT = new Font("Sans Serif", Font.BOLD, 22);
 	private JFrame frame;
 
@@ -194,7 +195,7 @@ public class Monatsansicht {
 		
 		
 		buttonList.stream().forEach(x -> x.setBackground(Color.WHITE));
-		buttonList.stream().forEach(x -> x.setFont(FONT));
+		buttonList.stream().forEach(x -> x.setFont(ButtonFont));
 		buttonList.stream().forEach(x -> tagePanel.add(x));
 		
 		
