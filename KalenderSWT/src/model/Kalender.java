@@ -23,7 +23,7 @@ public class Kalender {
 		}
 	}
 	
-	public void loadTermin(Termin t) {		//Zum laden aus der Datenbank
+	public void loadTermin(Termin t) {		//Zum laden aus der Datenbank, endlosschleife vermeiden
 		this.termine.add(t);
 	}
 	
@@ -73,6 +73,11 @@ public class Kalender {
 		return false;
 	}
 	
+	/**
+	 * Termine zu einem Tag als Liste laden
+	 * @param day	Monat und Jahr werden aus YearViewed und MonthViewd gelesen, keine Ubergabe noetig
+	 * @return Liste an Terminen an day
+	 */
 	public List<Termin> termineDesTages(int day){
 		List<Termin> termineU = new LinkedList<Termin>();
 		Calendar c = Calendar.getInstance();

@@ -29,7 +29,7 @@ public class Datenbank {
 	}
 	
 	/**
-	 * 
+	 * Treiber laden
 	 */
 	private Datenbank() {
 		try {
@@ -39,13 +39,16 @@ public class Datenbank {
 		} 
 	}
 	
+	/**
+	 * Verbinden mit DB
+	 */
 	public void connect() {
 		if(connection == null) {
 			try {
 				connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306?user=kalender&password=swt2018/2019&serverTimezone=CET");
 				System.out.println("Connection Sucsessfull");
 				
-				String selectTable = "use swt20182019;";
+				String selectTable = "use swt20182019;";	//Richtiges shema waehlen
 				java.sql.Statement stmt2 = connection.createStatement();
 				ResultSet termine = stmt2.executeQuery(selectTable);
 				
@@ -56,6 +59,9 @@ public class Datenbank {
 		}
 	}
 	
+	/**
+	 * Verbindung trennen.
+	 */
 	public void disconnect() {
 		if (connection != null) {
 			try {
@@ -70,10 +76,16 @@ public class Datenbank {
 		}
 	}
 	
+	/**
+	 * Benutzer in der DB hinzufuegen
+	 * @param userName	-Eindeutig jeder nur einmal vergeben
+	 * @param Password
+	 * nutzt stored Procedure der DB
+	 */
 	public void addUser(String userName, String  Password) {
 		String call = "call addUser(?, ?)"; //stored procedure
 		try (java.sql.CallableStatement stmt = connection.prepareCall(call)) {
-			Password = PasswordManagement.generateStorngPasswordHash(Password);
+			Password = PasswordManagement.generateStorngPasswordHash(Password);	//Passwort gehashed speichern
 			System.out.println(Password);
 			stmt.setString(1, userName);
 			stmt.setString(2, Password);
@@ -84,9 +96,10 @@ public class Datenbank {
 	}
 	
 	/**
-	 * 
+	 * Einloggen vorhandener User
 	 * @param userName
 	 * @param Password
+	 * Bei Uebereinstimmung der Angaben werden die User Termine des Aktuellen Monats geladen
 	 */
 	public void logIn(String userName, String Password) {
 			
@@ -95,16 +108,16 @@ public class Datenbank {
 			String sql = "select * from users where " + "name = '" + userName +"'";
 			java.sql.Statement stmt = connection.createStatement();
 			ResultSet res = stmt.executeQuery(sql);
-			System.out.println("just outside");
+			
 			if(res.next() && PasswordManagement.validatePassword(Password, res.getString("passwordHash"))) {
 				//login succesfull
-				System.out.println("in the if");
+				
 				try {
 					int MonthViewed = Calendar.getInstance().get(Calendar.MONTH) + 1; //+1 Weil Januar sonnst 0 Waere bei SQL Januar aber 1 ist.
 					int YearViewed = Calendar.getInstance().get(Calendar.YEAR);
 					
 					String getTermine = "select * from " + userName + " WHERE MONTH(startZeit) = " + MonthViewed + " AND YEAR(startZeit) = " + YearViewed;
-					System.out.println(getTermine);
+					
 					java.sql.Statement stmt2 = connection.createStatement();
 					
 					ResultSet termine = stmt2.executeQuery(getTermine);
@@ -128,6 +141,12 @@ public class Datenbank {
 		}
 	}
 
+	/**
+	 * Termine zu bestimmten Monat in Kalender laden
+	 * @param month
+	 * @param year
+	 * Termine werden mit IDs mit bereits geladenen Terminen verglichen, verhindert doppeltes Laden
+	 */
 	public void syncMonth(int month, int year){
 		month++;
 		try {
@@ -149,7 +168,10 @@ public class Datenbank {
 		}
 	}
 
-
+	/**
+	 * Termin in DB hinzufiegen
+	 * @param t der zu speichernde Termin
+	 */
 	public void addTermin(Termin t) {
 		if(User.getInstanz() == null) {
 			//error
@@ -165,6 +187,7 @@ public class Datenbank {
 				String notiz;
 				String icon;
 				
+				//Vorbereiten der Werte zum Schreiben in DB. Wenn keine Angabe, NULL in DB speichern
 				if (t.getName() == null) {
 					name = "NULL, ";
 				} else {
@@ -205,7 +228,7 @@ public class Datenbank {
 								+ " (name, startZeit, endZeit, Farbe, Ort, Notiz, Icon)"
 						+ "values(" + name + sZeit + eZeit + farbe + ort + notiz + icon + ")";
 				
-				System.out.println(addTermin);
+				
 				java.sql.Statement add = connection.createStatement();
 				add.executeUpdate(addTermin);
 				

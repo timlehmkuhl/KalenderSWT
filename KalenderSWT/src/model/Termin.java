@@ -15,7 +15,17 @@ public class Termin {
 	private String Icon;
 	private String Farbe;
 	
-	
+	/**
+	 * Konstruktor fuer Termine die aus der DB geladen werden 
+	 * @param iD
+	 * @param name
+	 * @param startZeit
+	 * @param endZeit
+	 * @param farbe
+	 * @param ort
+	 * @param notiz
+	 * @param icon
+	 */
 	public Termin(int iD, String name, Timestamp startZeit, Timestamp endZeit, String farbe, String ort, String notiz, String icon) {
 		Name = name;
 		StartZeit = startZeit;
