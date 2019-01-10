@@ -30,7 +30,7 @@ public class Monatsansicht {
 	private static final Font ButtonFont = new Font("Sans Serif", Font.BOLD, 42);
 	private static final Font FONTMONAT = new Font("Sans Serif", Font.BOLD, 45);
 	private JFrame frame;
-	ImageIcon test = new ImageIcon("u132.png");
+	
     
 
 	/**
@@ -103,9 +103,8 @@ public class Monatsansicht {
 		frame.getContentPane().add(tagePanel, BorderLayout.EAST);
 		
 		
-
-		
-		JButton terminHinzufuegen = new JButton(test);
+		ImageIcon hinzufuegenIcon = new ImageIcon("add.png");		
+		JButton terminHinzufuegen = new JButton(hinzufuegenIcon);
 		menuPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		terminHinzufuegen.addActionListener(new ActionListener() {
@@ -118,11 +117,13 @@ public class Monatsansicht {
 		menuPanel.add(platz1);
 		platz1.setVisible(false);
 		
-		JButton suche = new JButton("Suche");
+		ImageIcon suchenIcon = new ImageIcon("suchen.png");	
+		JButton suche = new JButton(suchenIcon);
 		menuPanel.add(suche);
 		suche.setFont(FONT);
 		
-		JButton einstellungen = new JButton("Einstellungen");
+		ImageIcon einstellungenIcon = new ImageIcon("einstellungen.png");	
+		JButton einstellungen = new JButton(einstellungenIcon);
 		menuPanel.add(einstellungen);
 		einstellungen.setFont(FONT);
 		
@@ -130,13 +131,14 @@ public class Monatsansicht {
 		menuPanel.add(monat);
 		monat.setFont(FONTMONAT);
 		
-		JButton einladungen = new JButton("Einladungen");
+		ImageIcon einladenIcon = new ImageIcon("einladen.png");	
+		JButton einladungen = new JButton(einladenIcon);
 		menuPanel.add(einladungen);
 		einladungen.setFont(FONT);
 		
 		
-		
-		JButton vorherigerMonat = new JButton("Vorheriger Monat");
+		ImageIcon linksIcon = new ImageIcon("pfeillinks.png");	
+		JButton vorherigerMonat = new JButton(linksIcon);
 		menuPanel.add(vorherigerMonat);
 		vorherigerMonat.setFont(FONT);
 		vorherigerMonat.addActionListener(new ActionListener() {
@@ -151,7 +153,8 @@ public class Monatsansicht {
 		platz2.setVisible(false);
 		
 		
-		JButton naechsterMonat = new JButton("Naechster Monat");
+		ImageIcon rechtsIcon = new ImageIcon("pfeilrechts.png");	
+		JButton naechsterMonat = new JButton(rechtsIcon);
 		menuPanel.add(naechsterMonat);
 		naechsterMonat.setFont(FONT);
 		naechsterMonat.addActionListener(new ActionListener() {
