@@ -17,6 +17,7 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -239,7 +240,11 @@ public class Monatsansicht {
 		
 		
 		//ALLE TAGE ALS BUTTONS
-		for (int i = 1; i <= 31; i++) {
+		
+		YearMonth yearMonthObject = YearMonth.of(User.getInstanz().getYearViewed(), User.getInstanz().getMonthViewed()+1);
+		int daysInMonth = yearMonthObject.lengthOfMonth(); //28  
+		
+		for (int i = 1; i <= daysInMonth; i++) {
 			buttonList.add(new JButton(String.valueOf(i)));
 			//buttonList.get(i).setBackground(Color.WHITE);
 			//buttonList.get(i).setFont(FONT);
@@ -252,6 +257,10 @@ public class Monatsansicht {
 					Tagesansicht.startTagesansicht(User.getInstanz().getKalender().termineDesTages(tag));
 				}
 			});
+		}
+		for (int i = daysInMonth; i <= 31; i++) {
+			buttonList.add(new JButton(String.valueOf(0)));
+			buttonList.get(i).setVisible(false);
 		}
 		
 		//Tage mit Termin bekommen eine Rote Zahl
