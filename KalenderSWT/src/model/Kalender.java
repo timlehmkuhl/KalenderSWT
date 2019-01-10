@@ -47,6 +47,7 @@ public class Kalender {
 	public List<Integer> DaysNotFree(){
 		List<Integer> days = new ArrayList<Integer>();
 		Calendar c = Calendar.getInstance();
+		
 		int year = User.getInstanz().getYearViewed();
 		int month = User.getInstanz().getMonthViewed();
 		for(Termin t : termine) {

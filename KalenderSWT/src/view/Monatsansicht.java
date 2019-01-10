@@ -16,6 +16,8 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -219,13 +221,21 @@ public class Monatsansicht {
 		
 		
 		//WOCHENANZEIGE
-		for (int j = 0; j <= 5; j++) {
-			buttonListWochen.add(new JLabel(String.valueOf("Woche " + j)));
-			if (j == 0) buttonListWochen.get(j).setVisible(false);
-			buttonListWochen.get(j).setFont(FONT);
-			wochenPanel.add(buttonListWochen.get(j));
-			
-		}
+				Calendar c = Calendar.getInstance();
+				String m = String.format("%02d", User.getInstanz().getMonthViewed() + 1);
+				String s = Integer.toString(User.getInstanz().getYearViewed()) + "-" + m + "-01 11:10:10.0";
+				Timestamp firstDay = Timestamp.valueOf(s);
+				
+				c.setTime(firstDay);
+				int w = c.get(Calendar.WEEK_OF_YEAR);
+				System.err.println(w);
+				for (int j = 0; j <= 5; j++) {
+					buttonListWochen.add(new JLabel(String.valueOf("Woche " + (j + w - 1))));
+					if (j == 0) buttonListWochen.get(j).setVisible(false);
+					buttonListWochen.get(j).setFont(FONT);
+					wochenPanel.add(buttonListWochen.get(j));
+					
+				}
 		
 		
 	}

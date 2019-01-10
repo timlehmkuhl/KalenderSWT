@@ -12,8 +12,8 @@ public class MainToTest {
 		Datenbank.getInstanz();
 		Datenbank.getInstanz().connect();
 		
-		//Datenbank.getInstanz().addUser("Person1", "password");	
-		Datenbank.getInstanz().logIn("Person1", "password");
+		//Datenbank.getInstanz().addUser("Person2", "password2");	
+		Datenbank.getInstanz().logIn("Person2", "password2");
 		
 		System.out.println(User.getInstanz());
 		//Timestamp begin = Timestamp.valueOf("2019-02-07 11:10:10.0");
