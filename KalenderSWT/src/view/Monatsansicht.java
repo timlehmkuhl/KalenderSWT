@@ -27,7 +27,7 @@ public class Monatsansicht {
 	public List<JLabel> buttonListWochentage = new LinkedList<>();
 	private static final Font FONT = new Font("Sans Serif", Font.BOLD, 24);
 	private static final Font ButtonFont = new Font("Sans Serif", Font.BOLD, 42);
-	private static final Font FONTMONAT = new Font("Sans Serif", Font.BOLD, 22);
+	private static final Font FONTMONAT = new Font("Sans Serif", Font.BOLD, 45);
 	private JFrame frame;
 
 	/**
@@ -87,7 +87,7 @@ public class Monatsansicht {
 		
 		GridLayout grid = new GridLayout(6, 7, 0, 0);
 		GridLayout gridWochen = new GridLayout(6, 1, 0, 0);
-		GridLayout gridMenu = new GridLayout(4, 2, 600, 10);
+		GridLayout gridMenu = new GridLayout(3, 3, 30, 10);
 
 		
 
@@ -111,6 +111,10 @@ public class Monatsansicht {
 			}
 		});
 		
+		JButton platz1 = new JButton("1");
+		menuPanel.add(platz1);
+		platz1.setVisible(false);
+		
 		JButton suche = new JButton("Suche");
 		menuPanel.add(suche);
 		suche.setFont(FONT);
@@ -118,6 +122,10 @@ public class Monatsansicht {
 		JButton einstellungen = new JButton("Einstellungen");
 		menuPanel.add(einstellungen);
 		einstellungen.setFont(FONT);
+		
+		JLabel monat = new JLabel(User.getMonthName(User.getInstanz().getMonthViewed()).concat(" ").concat(Integer.toString(User.getInstanz().getYearViewed())), SwingConstants.CENTER);
+		menuPanel.add(monat);
+		monat.setFont(FONTMONAT);
 		
 		JButton einladungen = new JButton("Einladungen");
 		menuPanel.add(einladungen);
@@ -135,6 +143,11 @@ public class Monatsansicht {
 			}
 		});
 		
+		JButton platz2 = new JButton("2");
+		menuPanel.add(platz2);
+		platz2.setVisible(false);
+		
+		
 		JButton naechsterMonat = new JButton("Naechster Monat");
 		menuPanel.add(naechsterMonat);
 		naechsterMonat.setFont(FONT);
@@ -145,12 +158,12 @@ public class Monatsansicht {
 			}
 		});
 		
-		JLabel monat = new JLabel(User.getMonthName(User.getInstanz().getMonthViewed()).concat(" ").concat(Integer.toString(User.getInstanz().getYearViewed())), SwingConstants.CENTER);
-		menuPanel.add(monat);
-		monat.setFont(FONTMONAT);
 		
 		
 		
+
+		
+
 		
 		
 	
