@@ -34,7 +34,7 @@ public class Tagesansicht {
 	private static List<Termin> termine = new LinkedList<>();;
 
 	/**
-	 * Launch the application.. BY ECLIPSE 
+	 * Wird aus der Monatsansicht gestartet
 	 */
 //	public static void main(String[] args) {
 	public static void startTagesansicht(List<Termin> tagesTermine) {
@@ -55,14 +55,17 @@ public class Tagesansicht {
 	}
 
 	static Tagesansicht windowP;
+	
 	/**
-	 * Create the application. BY ECLIPSE
+	 * Inizialisieren der Ansicht
 	 */
 	public Tagesansicht() {
 		initialize();
 	}
 
-	
+	/**
+	 * Fenster neu laden, gerade hinzugefuegte Termine erscheinen direkt.
+	 */
 	public void refreshView() {
 		
 		termine = User.getInstanz().getKalender().termineDesTages(User.getInstanz().getDayViewed());
@@ -73,7 +76,7 @@ public class Tagesansicht {
 		window.frame.setLocationRelativeTo(null);
 	}
 	/**
-	 * Initialize the contents of the frame. SELBER ANGEPASST
+	 * frame inhalte laden
 	 */
 	@SuppressWarnings("deprecation")
 	private void initialize() {
@@ -167,17 +170,6 @@ public class Tagesansicht {
 		}
 		
 		
-		
-/*String Zeit[] = {"0:00", "6:00", "12:00", "18:00", "24:00"};
-		
-		for (String s: Zeit) {
-			buttonListZeit.add(new JLabel(s, SwingConstants.CENTER));
-		}
-		buttonListZeit.stream().forEach(x -> x.setFont(FONT));
-		
-		buttonListZeit.stream().forEach(x -> linksPanel.add(x));
-		*/
-	//	buttonTermin.stream().forEach(x -> x.setSize(width, height););
 		
 		
 		buttonTermin.stream().forEach(x -> rechtsPanel.add(x));

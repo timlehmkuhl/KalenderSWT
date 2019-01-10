@@ -37,6 +37,16 @@ public class Termin {
 		ID = iD;
 	}
 
+	/**
+	 * Konstruktor ohne ID zum erstellen neuer Termine. ID wird spaeter von DB zugewiesen
+	 * @param name
+	 * @param startZeit
+	 * @param endZeit
+	 * @param farbe
+	 * @param ort
+	 * @param notiz
+	 * @param icon
+	 */
 	public Termin(String name, Timestamp startZeit, Timestamp endZeit, String farbe, String ort, String notiz, String icon) {
 		Name = name;
 		StartZeit = startZeit;

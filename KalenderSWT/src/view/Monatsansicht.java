@@ -30,7 +30,7 @@ public class Monatsansicht {
 	private JFrame frame;
 
 	/**
-	 * Launch the application.. BY ECLIPSE 
+	 * Monatsansicht starten (Aus MainToTest DB)
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -46,8 +46,12 @@ public class Monatsansicht {
 			}
 		});
 	}
+	
 	static Monatsansicht windowP;
 	
+	/**
+	 * Fenster neu laden, Termine die ganz neu hinzugefuegt worden sind werden angezeigt
+	 */
 	public void refreshView() {
 		frame.dispose();
 		Monatsansicht window = new Monatsansicht();
@@ -57,14 +61,14 @@ public class Monatsansicht {
 		windowP = window;
 	}
 	/**
-	 * Create the application. BY ECLIPSE
+	 * Inizialisieren der Ansicht
 	 */
 	public Monatsansicht() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame. SELBER ANGEPASST
+	 * Frame inhalte laden
 	 */
 	private void initialize() {
 		

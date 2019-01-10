@@ -15,6 +15,11 @@ public class User {
 			"Oktober", "November", "Dezember"};
 	private static final String[] WochenTage = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Sammstag", "Sonntag"};
 	
+	/**
+	 * User wird bei erfolgreichem login bei der DB von der DB erstellt
+	 * @param Username
+	 * @param kalender
+	 */
 	private User(String Username, Kalender kalender) {
 		this.Username = Username;
 		this.kalender = kalender;
@@ -26,6 +31,10 @@ public class User {
 		loggedIn = new User(Username, kalender);
 	}
 	
+	/**
+	 * Es gibt immer nur eine Instanz 
+	 * @return User instanz
+	 */
 	public static User getInstanz() {
 		if(loggedIn == null) {
 			return null;
@@ -67,6 +76,9 @@ public class User {
 //		}
 //	}
 	
+	/**
+	 * Laed Termine des naechsten Monats aus DB und aktuallisiert MonthViewd und YearViewed
+	 */
 	public void viewNextMonth() {
 		if(MonthViewed == 11) {
 			MonthViewed = 0;
@@ -77,6 +89,9 @@ public class User {
 		Datenbank.getInstanz().syncMonth(MonthViewed, YearViewed);
 	}
 	
+	/**
+	 * Laed Termine des vorherigen Monats aus DB und aktuallisiert MonthViewd und YearViewed
+	 */
 	public void viewPrevMonth() {
 		if(MonthViewed == 0) {
 			MonthViewed = 11;

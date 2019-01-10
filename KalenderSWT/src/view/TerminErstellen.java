@@ -151,7 +151,7 @@ public class TerminErstellen extends JFrame {
 		datumfeld.setBackground(Color.WHITE);
 		add(datumfeld);
 
-		String[] monatString = { "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September",
+		String[] monatString = { "Januar", "Februar", "Maerz", "April", "Mai", "Juni", "Juli", "August", "September",
 				"Oktober", "November", "Dezember" };
 		monatfeld = new JComboBox(monatString);
 				
@@ -250,7 +250,7 @@ public class TerminErstellen extends JFrame {
 		add(iconbild);
 		
 
-		iconwaehlen = new JButton("Icon Wählen");
+		iconwaehlen = new JButton("Icon Waehlen");
 		iconwaehlen.setBounds(311, 204, 250, 36);
 		iconwaehlen.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 13));
 		iconwaehlen.setBackground(Color.WHITE);
@@ -270,7 +270,7 @@ public class TerminErstellen extends JFrame {
 					iconbild.setIcon(ResizeImage(path));
 				}
 				else if(result == JFileChooser.CANCEL_OPTION) {
-					System.out.println("Kein Bild ausgewählt!");
+					System.out.println("Kein Bild ausgewaehlt!");
 				}
 
 			}
@@ -300,14 +300,14 @@ public class TerminErstellen extends JFrame {
 		farbwahl.setOpaque(true);
 		add(farbwahl);
 
-		farbewaehlen = new JButton("Farbe Wählen");
+		farbewaehlen = new JButton("Farbe Waehlen");
 		farbewaehlen.setBounds(311, 265, 250, 36);
 		farbewaehlen.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 13));
 		farbewaehlen.setBackground(Color.WHITE);
 
 		farbewaehlen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				color = JColorChooser.showDialog(null, "Wähle eine Farbe für deinen Termin", color);
+				color = JColorChooser.showDialog(null, "Waehle eine Farbe für deinen Termin", color);
 				if (color == null)
 					color = (Color.BLACK);
 
