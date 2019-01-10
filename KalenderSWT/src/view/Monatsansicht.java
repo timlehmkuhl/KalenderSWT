@@ -225,9 +225,9 @@ public class Monatsansicht {
 			wochentage = rotate(wochentage, 3);
 		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
 			wochentage = rotate(wochentage, 4);
-		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-			wochentage = rotate(wochentage, 5);
 		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+			wochentage = rotate(wochentage, 5);
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 			wochentage = rotate(wochentage, 6);
 		}
 		
