@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Monatsansicht {
@@ -29,6 +30,8 @@ public class Monatsansicht {
 	private static final Font ButtonFont = new Font("Sans Serif", Font.BOLD, 42);
 	private static final Font FONTMONAT = new Font("Sans Serif", Font.BOLD, 45);
 	private JFrame frame;
+	ImageIcon test = new ImageIcon("u132.png");
+    
 
 	/**
 	 * Monatsansicht starten (Aus MainToTest DB)
@@ -102,7 +105,7 @@ public class Monatsansicht {
 		
 
 		
-		JButton terminHinzufuegen = new JButton("Termin hinzufuegen");
+		JButton terminHinzufuegen = new JButton(test);
 		menuPanel.add(terminHinzufuegen);
 		terminHinzufuegen.setFont(FONT);
 		terminHinzufuegen.addActionListener(new ActionListener() {
