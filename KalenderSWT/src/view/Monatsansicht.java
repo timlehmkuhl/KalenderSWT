@@ -95,10 +95,51 @@ public class Monatsansicht {
 		return returnArray;
 		
 	}
+	
+	private int getShifted() {
+		Calendar c = Calendar.getInstance();
+		String m = String.format("%02d", User.getInstanz().getMonthViewed() + 1);
+		String values = Integer.toString(User.getInstanz().getYearViewed()) + "-" + m + "-01 11:10:10.0";
+		Timestamp firstDay = Timestamp.valueOf(values);
+		c.setTime(firstDay);
+		
+		int shifted;
+		if (c.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+			shifted = 0;
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) {
+			shifted = 1;
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
+			shifted = 2;
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
+			shifted = 3;
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+			shifted = 4;
+		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+			shifted = 5;
+		}else {
+			shifted = 6;
+		}
+		return shifted;
+	}
+	
+	private int getDaysInMonth() {
+		YearMonth yearMonthObject = YearMonth.of(User.getInstanz().getYearViewed(), User.getInstanz().getMonthViewed()+1);
+		return yearMonthObject.lengthOfMonth();
+	}
+	
+	private void addHiddenButtons(int anzahl) {
+		for (int i = 0; i < anzahl; i++) {
+			buttonList.add(new JButton(String.valueOf(0)));
+			buttonList.get(i).setVisible(false);
+		}
+	}
 	/**
 	 * Frame inhalte laden
 	 */
 	private void initialize() {
+		
+		int wochenanzeige;
+		int hiddenToAdd;
 		
 		User.getInstanz().setDayViewed(0);// Monatsansciht, nicht tagesansicht
 		frame = new JFrame();
@@ -112,8 +153,20 @@ public class Monatsansicht {
 		JPanel menuPanel = new JPanel();
 		JPanel wochenPanel = new JPanel();
 		
-		GridLayout grid = new GridLayout(6, 7, 0, 0);
-		GridLayout gridWochen = new GridLayout(6, 1, 0, 0);
+		GridLayout grid;
+		GridLayout gridWochen;
+		if(getDaysInMonth() + getShifted() > 35 ) {	//Extra reihe benötigt
+			grid = new GridLayout(7, 7, 0, 0); //6,7
+			gridWochen = new GridLayout(7, 1, 0, 0); //6
+			wochenanzeige = 6;
+			hiddenToAdd = 36;
+		} else {
+			grid = new GridLayout(6, 7, 0, 0); //6,7
+			gridWochen = new GridLayout(6, 1, 0, 0); //6
+			wochenanzeige = 5;
+			hiddenToAdd = 31;
+		}
+		
 		GridLayout gridMenu = new GridLayout(3, 3, 30, 10);
 
 		
@@ -209,28 +262,7 @@ public class Monatsansicht {
 		
 		String wochentage[] = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"};
 		
-		Calendar c = Calendar.getInstance();
-		String m = String.format("%02d", User.getInstanz().getMonthViewed() + 1);
-		String values = Integer.toString(User.getInstanz().getYearViewed()) + "-" + m + "-01 11:10:10.0";
-		Timestamp firstDay = Timestamp.valueOf(values);
-		
-		c.setTime(firstDay);
-		if (c.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
-			
-		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) {
-			wochentage = rotate(wochentage, 1);
-		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
-			wochentage = rotate(wochentage, 2);
-		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
-			wochentage = rotate(wochentage, 3);
-		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
-			wochentage = rotate(wochentage, 4);
-		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-			wochentage = rotate(wochentage, 5);
-		}else if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-			wochentage = rotate(wochentage, 6);
-		}
-		
+		addHiddenButtons(getShifted());
 		
 		for (String s: wochentage) {
 			buttonListWochentage.add(new JLabel(s, SwingConstants.CENTER));
@@ -242,15 +274,12 @@ public class Monatsansicht {
 		//ALLE TAGE ALS BUTTONS
 		
 		YearMonth yearMonthObject = YearMonth.of(User.getInstanz().getYearViewed(), User.getInstanz().getMonthViewed()+1);
-		int daysInMonth = yearMonthObject.lengthOfMonth(); //28  
+		int daysInMonth = yearMonthObject.lengthOfMonth();
 		
 		for (int i = 1; i <= daysInMonth; i++) {
 			buttonList.add(new JButton(String.valueOf(i)));
-			//buttonList.get(i).setBackground(Color.WHITE);
-			//buttonList.get(i).setFont(FONT);
-			//tagePanel.add(buttonList.get(i));
 			int tag = i;
-			buttonList.get(tag -1).addActionListener(new ActionListener() {
+			buttonList.get(tag -1 + getShifted()).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					frame.dispose();
 					User.getInstanz().setDayViewed(tag);
@@ -258,14 +287,14 @@ public class Monatsansicht {
 				}
 			});
 		}
-		for (int i = daysInMonth; i <= 31; i++) {
+		for (int i = daysInMonth; i + getShifted() <= hiddenToAdd; i++) {
 			buttonList.add(new JButton(String.valueOf(0)));
-			buttonList.get(i).setVisible(false);
+			buttonList.get(i+getShifted()).setVisible(false);
 		}
 		
 		//Tage mit Termin bekommen eine Rote Zahl
 		for(int i : User.getInstanz().getKalender().DaysNotFree()) {
-			buttonList.get(i-1).setForeground(Color.RED);
+			buttonList.get(i-1 + getShifted()).setForeground(Color.RED);
 		}
 		
 		
@@ -283,7 +312,7 @@ public class Monatsansicht {
 				c1.setTime(firstDay1);
 				int w = c1.get(Calendar.WEEK_OF_YEAR);
 				System.err.println(w);
-				for (int j = 0; j <= 5; j++) {
+				for (int j = 0; j <= wochenanzeige; j++) {
 					buttonListWochen.add(new JLabel(String.valueOf("Woche " + (j + w - 1))));
 					if (j == 0) buttonListWochen.get(j).setVisible(false);
 					buttonListWochen.get(j).setFont(FONT);
